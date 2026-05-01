@@ -191,7 +191,7 @@ struct TransactionRow: View {
                     .foregroundColor(.secondary)
                 Text(transaction.date, style: .date)
                     .font(.caption2)
-                    .foregroundColor(.tertiary)
+                    .foregroundColor(.secondary)
             }
             
             Spacer()
@@ -389,7 +389,7 @@ struct AddTransactionView: View {
         store.transactions.append(transaction)
         
         // Update account balance
-        if let firstAccount = store.accounts.first {
+        if var firstAccount = store.accounts.first {
             firstAccount.balance += transaction.amount
         }
     }
