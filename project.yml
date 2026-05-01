@@ -2,49 +2,44 @@ name: DailyExpenseAIPro
 options:
   bundleIdPrefix: com.ggsheng
   deploymentTarget:
-    iOS: 17.0
-  defaultConfig: DailyExpenseAIPro Dev
-  developmentTeam: 9L6N2ZF26B
-  settingPresets: none
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
 
 settings:
   base:
-    CODE_SIGN_STYLE: Automatic
-    IPHONEOS_DEPLOYMENT_TARGET: 17.0
-    PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro
-    PRODUCT_NAME: "$(TARGET_NAME)"
-    SWIFT_VERSION: 5.9
-    ENABLE_USER_SCRIPT_SANDBOXING: NO
-    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
-    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-    CODE_SIGN_IDENTITY: "Apple Development"
-    CODE_SIGN_IDENTITY[sdk=iphoneos*]: "Apple Development"
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 9L6N2ZF26B
-    INFOPLIST_FILE: Sources/Info.plist
-    LD_RUNPATH_SEARCH_PATHS: (
-      "$(inherited)",
-      "@executable_path/Frameworks",
-    )
-    MARKETING_VERSION: 1.0.0
-    PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro
-    PRODUCT_NAME: "$(TARGET_NAME)"
-    SWIFT_EMIT_LOC_STRINGS: true
-    SWIFT_VERSION: 5.9
-    TARGETED_DEVICE_FAMILY: 1,2
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
 
-configs:
-  debug:
-    base:
-      SWIFT_ACTIVE_COMPILATION_CONDITIONS: "DEBUG"
-  release:
-    base:
-      SWIFT_OPTIMIZATION_LEVEL: "-Owholemodule"
-
-packages:
-  Charts:
-    url: "https://github.com/danielgindi/Charts.git"
-    from: "5.1.0"
+targets:
+  DailyExpenseAIPro:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        INFOPLIST_FILE: Sources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro
+        PRODUCT_NAME: DailyExpenseAIPro
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+        CODE_SIGN_ENTITLEMENTS: ""
+        CODE_SIGNING_ALLOWED: NO
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+      configs:
+        Debug:
+          CODE_SIGNING_ALLOWED: NO
+        Release:
+          CODE_SIGNING_ALLOWED: YES
 
 schemes:
   DailyExpenseAIPro:
@@ -55,63 +50,3 @@ schemes:
       config: Debug
     archive:
       config: Release
-    distribute:
-      method: app-store
-
-fileGroups:
-  - Sources/**
-
-targets:
-  DailyExpenseAIPro:
-    type: application
-    platform: iOS
-    sources:
-      - Sources/**
-    configFiles:
-      Debug: Configs/Debug.xcconfig
-      Release: Configs/Release.xcconfig
-    settings:
-      base:
-        ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon"
-        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: "AccentColor"
-        CODE_SIGN_STYLE: Automatic
-        CURRENT_PROJECT_VERSION: 1
-        DEVELOPMENT_ASSET_PATHS: "\"DailyExpenseAIPro/Preview Content\""
-        DEVELOPMENT_TEAM: 9L6N2ZF26B
-        ENABLE_PREVIEWS: YES
-        INFOPLIST_FILE: Sources/Info.plist
-        IPHONEOS_DEPLOYMENT_TARGET: 17.0
-        LD_RUNPATH_SEARCH_PATHS: (
-          "$(inherited)",
-          "@executable_path/Frameworks",
-        )
-        MARKETING_VERSION: 1.0.0
-        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro
-        PRODUCT_NAME: "$(TARGET_NAME)"
-        SWIFT_EMIT_LOC_STRINGS: YES
-        SWIFT_VERSION: 5.9
-        TARGETED_DEVICE_FAMILY: 1,2
-    dependencies:
-      - package: Charts
-  DailyExpenseAIProWidget:
-    type: app-extension
-    platform: iOS
-    sources:
-      - Widgets/**
-    entitlements: Widgets/DailyExpenseAIProWidget.entitlements
-    settings:
-      base:
-        CODE_SIGN_STYLE: Automatic
-        CURRENT_PROJECT_VERSION: 1
-        DEVELOPMENT_TEAM: 9L6N2ZF26B
-        EXECUTABLE_NAME: "$(EXECUTABLE_PATH_BASE)"
-        INFOPLIST_FILE: Widgets/Info.plist
-        INSTALL_PATH: "$(PLUGIN_STANDARD_INSTALL_PATH)"
-        IPHONEOS_DEPLOYMENT_TARGET: 17.0
-        MARKETING_VERSION: 1.0.0
-        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro.widget
-        PRODUCT_NAME: "$(EXECUTABLE_NAME)"
-        SKIP_INSTALL: YES
-        SWIFT_EMIT_LOC_STRINGS: YES
-        SWIFT_VERSION: 5.9
-        TARGETED_DEVICE_FAMILY: 1,2

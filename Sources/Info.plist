@@ -53,5 +53,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+    <key>NSUserNotificationsUsageDescription</key>
+    <string>DailyExpenseAIPro reminds you to log expenses and alerts about budget limits.</string>
 </dict>
 </plist>

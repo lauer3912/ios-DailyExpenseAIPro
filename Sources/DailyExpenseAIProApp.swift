@@ -3,11 +3,27 @@ import SwiftUI
 @main
 struct DailyExpenseAIProApp: App {
     @StateObject private var store = AppStore()
-    
+    @State private var hasRequestedNotifications = false
+
     var body: some Scene {
         WindowGroup {
             MainTabView()
                 .environmentObject(store)
+                .onAppear {
+                    setupNotifications()
+                }
+        }
+    }
+    
+    private func setupNotifications() {
+        guard !hasRequestedNotifications else { return }
+        hasRequestedNotifications = true
+        
+        NotificationService.shared.requestPermission { granted in
+            if granted {
+                NotificationService.shared.scheduleDailyReminder(at: 20, minute: 0)
+                NotificationService.shared.scheduleWeeklySummary(at: 18, minute: 0, weekday: 6)
+            }
         }
     }
 }
@@ -24,7 +40,6 @@ class AppStore: ObservableObject {
     }
     
     private func loadSampleData() {
-        // Default categories
         categories = [
             Category(id: UUID(), name: "Food & Dining", icon: "fork.knife", color: .red, type: .expense),
             Category(id: UUID(), name: "Transportation", icon: "car", color: .blue, type: .expense),
@@ -37,14 +52,12 @@ class AppStore: ObservableObject {
             Category(id: UUID(), name: "Investment", icon: "chart.line.uptrend.xyaxis", color: .cyan, type: .income),
         ]
         
-        // Default accounts
         accounts = [
             Account(id: UUID(), name: "Cash", balance: 500.0, type: .cash),
             Account(id: UUID(), name: "Checking", balance: 2500.0, type: .checking),
             Account(id: UUID(), name: "Savings", balance: 10000.0, type: .savings),
         ]
         
-        // Sample transactions
         transactions = [
             Transaction(id: UUID(), amount: -45.50, category: categories[0], date: Date().addingTimeInterval(-86400), note: "Dinner at restaurant", type: .expense),
             Transaction(id: UUID(), amount: -120.00, category: categories[1], date: Date().addingTimeInterval(-172800), note: "Gas refill", type: .expense),
@@ -72,8 +85,6 @@ class AppStore: ObservableObject {
             .reduce(0) { $0 + $1.amount }
     }
 }
-
-// MARK: - Models
 
 enum TransactionType: String, CaseIterable {
     case income, expense
