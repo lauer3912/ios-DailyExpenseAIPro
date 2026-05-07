@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var showBudgets = false
     @State private var showGoals = false
     @State private var showRecurring = false
+    @State private var showSubscription = false
 
     let currencies = ["USD", "EUR", "GBP", "JPY", "CNY", "CAD", "AUD", "CHF", "INR", "BRL"]
 
@@ -153,14 +154,14 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Label("Premium Status", systemImage: "crown.fill")
-                            .foregroundColor(.orange)
+                            .foregroundColor(store.isPremium ? .mint : .orange)
                         Spacer()
-                        Text("Free Plan")
-                            .foregroundColor(.secondary)
+                        Text(store.isPremium ? "Premium" : "Free Plan")
+                            .foregroundColor(store.isPremium ? .mint : .secondary)
                     }
 
                     Button {
-                        // Premium purchase
+                        showSubscription = true
                     } label: {
                         Label("Upgrade to Premium", systemImage: "sparkles")
                             .foregroundColor(.mint)
@@ -228,6 +229,9 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $showRecurring) {
                 RecurringTransactionsView()
+            }
+            .sheet(isPresented: $showSubscription) {
+                SubscriptionView()
             }
             .sheet(isPresented: $showExport) {
                 ExportView()

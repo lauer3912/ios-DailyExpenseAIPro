@@ -13,6 +13,7 @@ class AppStore: ObservableObject {
     @Published var recurringTransactions: [RecurringTransaction] = []
     @Published var searchText: String = ""
     @Published var selectedCurrency: String = "USD"
+    @Published var isPremium: Bool = false
 
     private let userDefaultsKey = "DailyExpenseAIPro_Data"
 
@@ -74,6 +75,7 @@ class AppStore: ObservableObject {
             UserDefaults.standard.set(goalData, forKey: userDefaultsKey + "_goals")
             UserDefaults.standard.set(recurringData, forKey: userDefaultsKey + "_recurring")
             UserDefaults.standard.set(selectedCurrency, forKey: userDefaultsKey + "_currency")
+            UserDefaults.standard.set(isPremium, forKey: userDefaultsKey + "_premium")
         }
     }
 
@@ -108,6 +110,8 @@ class AppStore: ObservableObject {
         if let currency = UserDefaults.standard.string(forKey: userDefaultsKey + "_currency") {
             selectedCurrency = currency
         }
+
+        isPremium = UserDefaults.standard.bool(forKey: userDefaultsKey + "_premium")
     }
 
     // MARK: - Computed Properties
