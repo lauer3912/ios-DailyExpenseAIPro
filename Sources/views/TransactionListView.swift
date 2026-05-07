@@ -237,7 +237,7 @@ struct TransactionListView: View {
     }
 }
 
-extension TransactionFilter {
+extension TransactionListView.TransactionFilter {
     func toType() -> TransactionType? {
         switch self {
         case .all: return nil

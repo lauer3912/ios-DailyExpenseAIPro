@@ -353,7 +353,7 @@ class AppStore: ObservableObject {
                     note: recurring.note,
                     type: recurring.type
                 )
-                addTransaction(transaction, toAccount: recurring.account)
+                let account = accounts.first { $0.id == recurring.accountId }; if let acc = account { addTransaction(transaction, toAccount: acc) }
             }
         }
     }
@@ -460,7 +460,7 @@ enum AccountType: String, Codable, CaseIterable {
     case cash, checking, savings, credit, investment
 }
 
-enum BudgetPeriod: String, CaseIterable {
+enum BudgetPeriod: String, CaseIterable, Codable {
     case weekly, monthly, yearly
 }
 
@@ -512,7 +512,7 @@ struct Category: Identifiable, Equatable, Codable, Hashable {
     }
 }
 
-struct Account: Identifiable, Codable {
+struct Account: Identifiable, Codable, Hashable {
     let id: UUID
     var name: String
     var balance: Double

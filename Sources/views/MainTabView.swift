@@ -79,7 +79,7 @@ struct DashboardView: View {
                     RecentTransactionsCard()
 
                     // Budget Progress
-                    BudgetProgressCard(showBudgets: $showBudgets)
+                    BudgetProgressView()
 
                     // Goals Overview
                     GoalsOverviewCard(showGoals: $showGoals)
