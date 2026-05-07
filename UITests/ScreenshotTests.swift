@@ -9,8 +9,6 @@ final class ScreenshotTests: XCTestCase {
         app = XCUIApplication()
         app.launchArguments = ["--uitesting"]
         app.launch()
-
-        // Wait for app to fully load
         sleep(2)
     }
 
@@ -20,63 +18,60 @@ final class ScreenshotTests: XCTestCase {
 
     // MARK: - iPhone 6.9" Screenshots
 
+    private func saveScreenshot(named name: String) {
+        let screenshot = app.windows.firstMatch.screenshot()
+        let data = screenshot.pngRepresentation
+        let path = "/tmp/iphone69_\(name).png"
+        try? data.write(to: URL(fileURLWithPath: path))
+        print("Saved: \(path) (\(data.count) bytes)")
+    }
+
     func testiPhone_69_01_Dashboard() throws {
-        // Make sure we're on Dashboard (tab 0)
         app.tabBars.buttons.element(boundBy: 0).tap()
         sleep(1)
-
-        let screenshot = app.windows.firstMatch.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = "iPhone_69_Dashboard"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        saveScreenshot(named: "Dashboard")
     }
 
     func testiPhone_69_02_Transactions() throws {
-        // Switch to Transactions tab (tab 1)
         app.tabBars.buttons.element(boundBy: 1).tap()
         sleep(1)
-
-        let screenshot = app.windows.firstMatch.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = "iPhone_69_Transactions"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        saveScreenshot(named: "Transactions")
     }
 
     func testiPhone_69_03_AddTransaction() throws {
-        // Switch to Add tab (tab 2)
         app.tabBars.buttons.element(boundBy: 2).tap()
         sleep(1)
-
-        let screenshot = app.windows.firstMatch.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = "iPhone_69_AddTransaction"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        saveScreenshot(named: "AddTransaction")
     }
 
     func testiPhone_69_04_Analytics() throws {
-        // Switch to Analytics tab (tab 3)
         app.tabBars.buttons.element(boundBy: 3).tap()
         sleep(1)
-
-        let screenshot = app.windows.firstMatch.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = "iPhone_69_Analytics"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        saveScreenshot(named: "Analytics")
     }
 
     func testiPhone_69_05_Settings() throws {
-        // Switch to Settings tab (tab 4)
         app.tabBars.buttons.element(boundBy: 4).tap()
         sleep(1)
+        saveScreenshot(named: "Settings")
+    }
 
-        let screenshot = app.windows.firstMatch.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = "iPhone_69_Settings"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+    func testiPhone_69_06_Subscription() throws {
+        // Go to Settings
+        app.tabBars.buttons.element(boundBy: 4).tap()
+        sleep(2)
+        // Swipe up to reach Subscription section
+        app.windows.firstMatch.swipeUp()
+        sleep(1)
+        app.windows.firstMatch.swipeUp()
+        sleep(1)
+        // Tap Upgrade to Premium
+        let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let button = app.buttons.element(matching: predicate)
+        if button.exists {
+            button.tap()
+            sleep(2)
+        }
+        saveScreenshot(named: "Subscription")
     }
 }
