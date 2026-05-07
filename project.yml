@@ -67,14 +67,15 @@ schemes:
     build:
       targets:
         DailyExpenseAIPro: all
+        DailyExpenseAIProUITests: all
     run:
       config: Debug
     archive:
       config: Release
     test:
       config: Debug
-      gatherSwitches:
-        enablingAllTestables: true
+      targets:
+        - DailyExpenseAIProUITests
     profile:
       config: Release
   DailyExpenseAIProUITests:
@@ -85,5 +86,5 @@ schemes:
       config: Debug
     test:
       config: Debug
-      gatherSwitches:
-        enablingAllTestables: true
+      targets:
+        - DailyExpenseAIProUITests
