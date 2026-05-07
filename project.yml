@@ -71,6 +71,12 @@ schemes:
       config: Debug
     archive:
       config: Release
+    test:
+      config: Debug
+      gatherSwitches:
+        enablingAllTestables: true
+    profile:
+      config: Release
   DailyExpenseAIProUITests:
     build:
       targets:
