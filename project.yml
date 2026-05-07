@@ -41,6 +41,24 @@ targets:
         Release:
           CODE_SIGNING_ALLOWED: YES
 
+  DailyExpenseAIProUITests:
+    type: application.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIProUITests
+        PRODUCT_NAME: DailyExpenseAIProUITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: DailyExpenseAIPro
+        CODE_SIGN_ENTITLEMENTS: ""
+        CODE_SIGNING_ALLOWED: NO
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+      configs:
+        Debug:
+          CODE_SIGNING_ALLOWED: NO
+
 schemes:
   DailyExpenseAIPro:
     build:
@@ -50,3 +68,13 @@ schemes:
       config: Debug
     archive:
       config: Release
+  DailyExpenseAIProUITests:
+    build:
+      targets:
+        DailyExpenseAIProUITests: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherSwitches:
+        enablingAllTestables: true
