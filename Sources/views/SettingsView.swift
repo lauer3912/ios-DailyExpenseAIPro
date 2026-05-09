@@ -271,12 +271,21 @@ struct SettingsView: View {
             .alert("Delete All Data", isPresented: $showDeleteAlert) {
                 Button("Cancel", role: .cancel) {}
                 Button("Delete", role: .destructive) {
-                    store.deleteAllData()
+                    deleteAllData()
                 }
             } message: {
                 Text("This will permanently delete all your accounts, transactions, budgets, and goals. This action cannot be undone.")
             }
         }
+    }
+
+    func deleteAllData() {
+        store.transactions.removeAll()
+        store.accounts.removeAll()
+        store.budgets.removeAll()
+        store.goals.removeAll()
+        store.recurringTransactions.removeAll()
+        store.saveToUserDefaults()
     }
 }
 
