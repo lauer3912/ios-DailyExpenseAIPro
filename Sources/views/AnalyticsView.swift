@@ -20,175 +20,236 @@ struct AnalyticsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Period Selector
-                    Picker("Period", selection: $selectedPeriod) {
-                        ForEach(AnalyticsPeriod.allCases, id: \.self) { period in
-                            Text(period.rawValue).tag(period)
+            ZStack {
+                AppTheme.backgroundPrimary.ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // Period Selector (Futuristic)
+                        HStack(spacing: 0) {
+                            ForEach(AnalyticsPeriod.allCases, id: \.self) { period in
+                                Button {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        selectedPeriod = period
+                                    }
+                                } label: {
+                                    Text(period.rawValue)
+                                        .font(.subheadline.bold())
+                                        .foregroundStyle(selectedPeriod == period ? AppTheme.backgroundPrimary : AppTheme.textSecondary)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 10)
+                                        .background(
+                                            selectedPeriod == period ? 
+                                            LinearGradient(colors: [AppTheme.primaryCyan, AppTheme.primaryBlue], startPoint: .leading, endPoint: .trailing) :
+                                            LinearGradient(colors: [Color.clear], startPoint: .leading, endPoint: .trailing)
+                                        )
+                                }
+                            }
                         }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
+                        .background(AppTheme.backgroundCard)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
 
-                    // Summary Cards
-                    HStack(spacing: 12) {
-                        SummaryCard(
-                            title: "Total Income",
-                            value: formatCurrency(totalIncome),
-                            color: .green,
-                            icon: "arrow.down.circle.fill"
-                        )
+                        // Summary Cards
+                        HStack(spacing: 12) {
+                            SummaryCard(
+                                title: "Total Income",
+                                value: formatCurrency(totalIncome),
+                                color: AppTheme.success,
+                                icon: "arrow.down.circle.fill"
+                            )
 
-                        SummaryCard(
-                            title: "Total Expenses",
-                            value: formatCurrency(totalExpenses),
-                            color: .red,
-                            icon: "arrow.up.circle.fill"
-                        )
-                    }
-                    .padding(.horizontal)
-
-                    // Net Balance
-                    VStack(spacing: 4) {
-                        Text("Net Balance")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-
-                        Text(formatCurrency(totalIncome - totalExpenses))
-                            .font(.title.bold())
-                            .foregroundColor(totalIncome >= totalExpenses ? .green : .red)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(16)
-                    .padding(.horizontal)
-
-                    // Chart Type Selector
-                    Picker("Chart", selection: $selectedChartType) {
-                        ForEach(ChartType.allCases, id: \.self) { type in
-                            Text(type.rawValue).tag(type)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-
-                    // Main Chart
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Spending by Category")
-                            .font(.headline)
-                            .padding(.horizontal)
-
-                        switch selectedChartType {
-                        case .pie:
-                            PieChartView(data: categoryData)
-                        case .bar:
-                            BarChartView(data: categoryData)
-                        case .line:
-                            LineChartView(data: trendData)
-                        }
-                    }
-                    .padding(.vertical)
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
-                    .padding(.horizontal)
-
-                    // Category Breakdown List
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Category Breakdown")
-                            .font(.headline)
-
-                        ForEach(categoryData, id: \.category.id) { item in
-                            CategoryBreakdownRow(
-                                category: item.category,
-                                amount: item.amount,
-                                percentage: item.amount / max(totalExpenses, 1)
+                            SummaryCard(
+                                title: "Total Expenses",
+                                value: formatCurrency(totalExpenses),
+                                color: AppTheme.error,
+                                icon: "arrow.up.circle.fill"
                             )
                         }
-                    }
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
-                    .padding(.horizontal)
+                        .padding(.horizontal)
 
-                    // Trend Data
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Spending Trend")
-                            .font(.headline)
-
-                        Chart {
-                            ForEach(trendData, id: \.period) { item in
-                                BarMark(
-                                    x: .value("Period", item.period),
-                                    y: .value("Amount", item.amount)
+                        // Net Balance (Glowing card)
+                        VStack(spacing: 8) {
+                            Text("Net Balance")
+                                .font(.caption)
+                                .foregroundColor(AppTheme.textSecondary)
+                            
+                            Text(formatCurrency(totalIncome - totalExpenses))
+                                .font(.title.bold())
+                                .foregroundStyle(
+                                    totalIncome >= totalExpenses ?
+                                    LinearGradient(colors: [AppTheme.success, Color(hex: "00A854")], startPoint: .top, endPoint: .bottom) :
+                                    LinearGradient(colors: [AppTheme.error, Color(hex: "D50000")], startPoint: .top, endPoint: .bottom)
                                 )
-                                .foregroundStyle(Color.mint.gradient)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(20)
+                        .glassBackground()
+                        .padding(.horizontal)
+
+                        // Chart Type Selector
+                        HStack(spacing: 0) {
+                            ForEach(ChartType.allCases, id: \.self) { type in
+                                Button {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        selectedChartType = type
+                                    }
+                                } label: {
+                                    HStack(spacing: 6) {
+                                        Image(systemName: chartTypeIcon(type))
+                                        Text(type.rawValue)
+                                    }
+                                    .font(.caption.bold())
+                                    .foregroundStyle(selectedChartType == type ? AppTheme.primaryCyan : AppTheme.textSecondary)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        selectedChartType == type ?
+                                        AppTheme.backgroundCard :
+                                        Color.clear
+                                    )
+                                }
                             }
                         }
-                        .frame(height: 200)
-                        .chartXAxis {
-                            AxisMarks(values: .automatic) { value in
-                                AxisValueLabel()
-                                    .font(.caption2)
+                        .background(AppTheme.backgroundSecondary)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+
+                        // Main Chart (Futuristic card)
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Spending by Category")
+                                .font(.headline)
+                                .foregroundStyle(AppTheme.textPrimary)
+                                .padding(.horizontal)
+
+                            switch selectedChartType {
+                            case .pie:
+                                PieChartView(data: categoryData)
+                            case .bar:
+                                BarChartView(data: categoryData)
+                            case .line:
+                                LineChartView(data: trendData)
                             }
                         }
-                        .chartYAxis {
-                            AxisMarks(position: .leading) { value in
-                                AxisGridLine()
-                                AxisValueLabel {
-                                    if let amount = value.as(Double.self) {
-                                        Text("$\(Int(amount))")
-                                            .font(.caption2)
+                        .padding(.vertical)
+                        .glassBackground()
+                        .padding(.horizontal)
+
+                        // Category Breakdown List
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Category Breakdown")
+                                .font(.headline)
+                                .foregroundStyle(AppTheme.textPrimary)
+
+                            ForEach(categoryData, id: \.category.id) { item in
+                                CategoryBreakdownRow(
+                                    category: item.category,
+                                    amount: item.amount,
+                                    percentage: item.amount / max(totalExpenses, 1)
+                                )
+                            }
+                        }
+                        .padding()
+                        .glassBackground()
+                        .padding(.horizontal)
+
+                        // Trend Chart (Futuristic)
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Spending Trend")
+                                .font(.headline)
+                                .foregroundStyle(AppTheme.textPrimary)
+
+                            Chart {
+                                ForEach(trendData, id: \.period) { item in
+                                    BarMark(
+                                        x: .value("Period", item.period),
+                                        y: .value("Amount", item.amount)
+                                    )
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            colors: [AppTheme.primaryCyan, AppTheme.primaryPurple],
+                                            startPoint: .bottom,
+                                            endPoint: .top
+                                        )
+                                    )
+                                    .cornerRadius(6)
+                                }
+                            }
+                            .frame(height: 200)
+                            .chartXAxis {
+                                AxisMarks(values: .automatic) { value in
+                                    AxisValueLabel()
+                                        .font(.caption2)
+                                        .foregroundStyle(AppTheme.textSecondary)
+                                }
+                            }
+                            .chartYAxis {
+                                AxisMarks(position: .leading) { value in
+                                    AxisGridLine()
+                                        .foregroundStyle(AppTheme.textSecondary.opacity(0.2))
+                                    AxisValueLabel {
+                                        if let amount = value.as(Double.self) {
+                                            Text("$\(Int(amount))")
+                                                .font(.caption2)
+                                                .foregroundStyle(AppTheme.textSecondary)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
-                    .padding(.horizontal)
+                        .padding()
+                        .glassBackground()
+                        .padding(.horizontal)
 
-                    // Top Spending Days
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Top Spending Days")
-                            .font(.headline)
+                        // Top Spending Days
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Top Spending Days")
+                                .font(.headline)
+                                .foregroundStyle(AppTheme.textPrimary)
 
-                        ForEach(topSpendingDays, id: \.date) { item in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(formatFullDate(item.date))
+                            ForEach(topSpendingDays, id: \.date) { item in
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(formatFullDate(item.date))
+                                            .font(.subheadline)
+                                            .foregroundStyle(AppTheme.textPrimary)
+                                        Text("\(item.count) transactions")
+                                            .font(.caption)
+                                            .foregroundColor(AppTheme.textSecondary)
+                                    }
+
+                                    Spacer()
+
+                                    Text(formatCurrency(item.amount))
                                         .font(.subheadline)
-                                    Text("\(item.count) transactions")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(AppTheme.error)
                                 }
-
-                                Spacer()
-
-                                Text(formatCurrency(item.amount))
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.red)
+                                .padding(.vertical, 8)
                             }
-                            .padding(.vertical, 4)
                         }
-                    }
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
-                    .padding(.horizontal)
+                        .padding()
+                        .glassBackground()
+                        .padding(.horizontal)
 
-                    Spacer(minLength: 40)
+                        Spacer(minLength: 40)
+                    }
+                    .padding(.top)
                 }
-                .padding(.top)
             }
             .navigationTitle("Analytics")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(AppTheme.backgroundSecondary, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+        }
+    }
+
+    private func chartTypeIcon(_ type: ChartType) -> String {
+        switch type {
+        case .pie: return "chart.pie.fill"
+        case .bar: return "chart.bar.fill"
+        case .line: return "chart.line.uptrend.xyaxis"
         }
     }
 
@@ -277,7 +338,94 @@ struct AnalyticsView: View {
     }
 }
 
-// MARK: - Chart Views
+// MARK: - Futuristic Summary Card
+struct SummaryCard: View {
+    let title: String
+    let value: String
+    let color: Color
+    let icon: String
+
+    var body: some View {
+        VStack(spacing: 10) {
+            HStack {
+                Image(systemName: icon)
+                    .foregroundStyle(color)
+                    .neonGlow(color: color)
+                Spacer()
+            }
+            
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.caption)
+                        .foregroundColor(AppTheme.textSecondary)
+                    Text(value)
+                        .font(.title3.bold())
+                        .foregroundStyle(AppTheme.textPrimary)
+                }
+                Spacer()
+            }
+        }
+        .padding(16)
+        .glassBackground()
+    }
+}
+
+// MARK: - Category Breakdown Row
+struct CategoryBreakdownRow: View {
+    let category: Category
+    let amount: Double
+    let percentage: Double
+
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                // Category color dot with glow
+                Circle()
+                    .fill(category.color)
+                    .frame(width: 10, height: 10)
+                    .shadow(color: category.color.opacity(0.6), radius: 4)
+                
+                Text(category.name)
+                    .font(.subheadline)
+                    .foregroundStyle(AppTheme.textPrimary)
+                
+                Spacer()
+                
+                Text(formatCurrency(amount))
+                    .font(.subheadline)
+                    .foregroundStyle(AppTheme.textPrimary)
+            }
+            
+            // Progress bar
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(AppTheme.backgroundSecondary)
+                    
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(
+                            LinearGradient(
+                                colors: [category.color, category.color.opacity(0.6)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .frame(width: geo.size.width * min(percentage, 1.0))
+                        .shadow(color: category.color.opacity(0.4), radius: 4)
+                }
+            }
+            .frame(height: 6)
+        }
+        .padding(.vertical, 4)
+    }
+    
+    private func formatCurrency(_ amount: Double) -> String {
+        return "$" + String(format: "%.2f", amount)
+    }
+}
+
+// MARK: - Chart Views (Futuristic)
 
 struct PieChartView: View {
     let data: [(category: Category, amount: Double)]
@@ -289,42 +437,34 @@ struct PieChartView: View {
             Chart(data, id: \.category.id) { item in
                 SectorMark(
                     angle: .value("Amount", item.amount),
-                    innerRadius: .ratio(0.5),
-                    angularInset: 1.5
+                    innerRadius: .ratio(0.6),
+                    angularInset: 2.0
                 )
-                .foregroundStyle(item.category.color)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [item.category.color, item.category.color.opacity(0.6)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
                 .annotation(position: .overlay) {
                     if item.amount / data.reduce(0) { $0 + $1.amount } > 0.08 {
                         Text(formatShort(item.amount))
-                            .font(.caption2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .font(.caption2.bold())
+                            .foregroundStyle(AppTheme.textPrimary)
                     }
                 }
             }
             .frame(height: 250)
-            .chartLegend(position: .bottom, alignment: .center, spacing: 16) {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 8) {
-                    ForEach(data.prefix(8), id: \.category.id) { item in
-                        HStack(spacing: 4) {
-                            Circle()
-                                .fill(item.category.color)
-                                .frame(width: 8, height: 8)
-                            Text(item.category.name)
-                                .font(.caption2)
-                                .lineLimit(1)
-                        }
-                    }
-                }
-            }
+            .chartLegend(.hidden)
         }
     }
-
-    func formatShort(_ amount: Double) -> String {
+    
+    private func formatShort(_ amount: Double) -> String {
         if amount >= 1000 {
-            return "$" + String(format: "%.1fK", amount / 1000)
+            return "$\(String(format: "%.0f", amount / 1000))k"
         }
-        return "$" + String(format: "%.0f", amount)
+        return "$\(String(format: "%.0f", amount))"
     }
 }
 
@@ -335,38 +475,43 @@ struct BarChartView: View {
         if data.isEmpty {
             EmptyChartPlaceholder(message: "No expense data")
         } else {
-            Chart(data.prefix(8), id: \.category.id) { item in
+            Chart(data, id: \.category.id) { item in
                 BarMark(
-                    x: .value("Amount", item.amount),
-                    y: .value("Category", item.category.name)
+                    x: .value("Category", item.category.name),
+                    y: .value("Amount", item.amount)
                 )
-                .foregroundStyle(item.category.color.gradient)
-                .annotation(position: .trailing) {
-                    Text(formatShort(item.amount))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [item.category.color, item.category.color.opacity(0.6)],
+                        startPoint: .bottom,
+                        endPoint: .top
+                    )
+                )
+                .cornerRadius(8)
+                .annotation(position: .top) {
+                    Text("$\(Int(item.amount))")
                         .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(AppTheme.textSecondary)
                 }
             }
-            .frame(height: CGFloat(data.prefix(8).count) * 44 + 40)
+            .frame(height: 250)
             .chartXAxis {
-                AxisMarks(position: .bottom) { value in
+                AxisMarks(values: .automatic) { _ in
+                    AxisValueLabel()
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.textSecondary)
+                }
+            }
+            .chartYAxis {
+                AxisMarks(position: .leading) { _ in
                     AxisGridLine()
-                    AxisValueLabel {
-                        if let amount = value.as(Double.self) {
-                            Text("$\(Int(amount))")
-                                .font(.caption2)
-                        }
-                    }
+                        .foregroundStyle(AppTheme.textSecondary.opacity(0.2))
+                    AxisValueLabel()
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.textSecondary)
                 }
             }
         }
-    }
-
-    func formatShort(_ amount: Double) -> String {
-        if amount >= 1000 {
-            return "$" + String(format: "%.1fK", amount / 1000)
-        }
-        return "$" + String(format: "%.0f", amount)
     }
 }
 
@@ -383,136 +528,65 @@ struct LineChartView: View {
                         x: .value("Period", item.period),
                         y: .value("Amount", item.amount)
                     )
-                    .foregroundStyle(Color.mint.gradient)
-                    .symbol(Circle())
-
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [AppTheme.primaryCyan, AppTheme.primaryPurple],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .interpolationMethod(.catmullRom)
+                    
                     AreaMark(
                         x: .value("Period", item.period),
                         y: .value("Amount", item.amount)
                     )
-                    .foregroundStyle(Color.mint.opacity(0.1).gradient)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [AppTheme.primaryCyan.opacity(0.3), AppTheme.primaryPurple.opacity(0.05)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .interpolationMethod(.catmullRom)
                 }
             }
-            .frame(height: 220)
+            .frame(height: 250)
             .chartXAxis {
                 AxisMarks(values: .automatic) { _ in
                     AxisValueLabel()
                         .font(.caption2)
+                        .foregroundStyle(AppTheme.textSecondary)
                 }
             }
             .chartYAxis {
-                AxisMarks(position: .leading) { value in
+                AxisMarks(position: .leading) { _ in
                     AxisGridLine()
-                    AxisValueLabel {
-                        if let amount = value.as(Double.self) {
-                            Text("$\(Int(amount))")
-                                .font(.caption2)
-                        }
-                    }
+                        .foregroundStyle(AppTheme.textSecondary.opacity(0.2))
+                    AxisValueLabel()
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.textSecondary)
                 }
             }
         }
     }
 }
 
-struct SummaryCard: View {
-    let title: String
-    let value: String
-    let color: Color
-    let icon: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundColor(color)
-                Text(title)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            Text(value)
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(color)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-    }
-}
-
-struct CategoryBreakdownRow: View {
-    let category: Category
-    let amount: Double
-    let percentage: Double
-
-    var body: some View {
-        VStack(spacing: 6) {
-            HStack {
-                HStack(spacing: 8) {
-                    Image(systemName: category.icon)
-                        .font(.caption)
-                        .frame(width: 24, height: 24)
-                        .background(category.color.opacity(0.12))
-                        .foregroundColor(category.color)
-                        .clipShape(Circle())
-
-                    Text(category.name)
-                        .font(.caption)
-                }
-
-                Spacer()
-
-                Text("$\(String(format: "%.2f", amount))")
-                    .font(.caption)
-                    .fontWeight(.medium)
-
-                Text("\(Int(percentage * 100))%")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                    .frame(width: 36, alignment: .trailing)
-            }
-
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    Rectangle()
-                        .fill(Color(.systemGray5))
-                        .frame(height: 4)
-                        .cornerRadius(2)
-
-                    Rectangle()
-                        .fill(category.color)
-                        .frame(width: geometry.size.width * percentage, height: 4)
-                        .cornerRadius(2)
-                }
-            }
-            .frame(height: 4)
-        }
-        .padding(.vertical, 4)
-    }
-}
-
+// MARK: - Empty Chart Placeholder
 struct EmptyChartPlaceholder: View {
     let message: String
 
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: "chart.bar.xaxis")
-                .font(.largeTitle)
-                .foregroundColor(.secondary.opacity(0.5))
-
+                .font(.system(size: 40))
+                .foregroundStyle(AppTheme.textSecondary.opacity(0.5))
+            
             Text(message)
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.subheadline)
+                .foregroundColor(AppTheme.textSecondary)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 200)
     }
-}
-
-#Preview {
-    AnalyticsView()
-        .environmentObject(AppStore())
 }
