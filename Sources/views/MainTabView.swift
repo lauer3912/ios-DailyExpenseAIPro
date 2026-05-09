@@ -7,92 +7,134 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Dashboard
+            // Dashboard (Quest Hub)
             DashboardView()
                 .tabItem {
                     Image(systemName: "house.fill")
-                    Text("Dashboard")
+                    Text("Hub")
                 }
                 .tag(0)
 
-            // Transactions
+            // Transactions (Inventory)
             TransactionListView()
                 .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("Transactions")
+                    Image(systemName: "list.bullet.rectangle.fill")
+                    Text("Items")
                 }
                 .tag(1)
 
-            // Add Button (Center, prominent)
+            // Add Button (Quest Entry)
             AddTransactionView()
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
                         .font(.title2)
-                    Text("Add")
+                    Text("Quest")
                 }
                 .tag(2)
 
-            // Analytics
+            // Analytics (Stats)
             AnalyticsView()
                 .tabItem {
-                    Image(systemName: "chart.pie.fill")
-                    Text("Analytics")
+                    Image(systemName: "chart.bar.fill")
+                    Text("Stats")
                 }
                 .tag(3)
 
-            // More
+            // More (Menu)
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
-                    Text("More")
+                    Text("Menu")
                 }
                 .tag(4)
         }
-        .tint(AppTheme.primaryCyan)
-        .preferredColorScheme(.dark)  // Dark mode by default
+        .tint(GameTheme.neonCyan)
+        .preferredColorScheme(.dark)
     }
 }
 
-// MARK: - Dashboard View (Futuristic)
+// MARK: - Dashboard View (Quest Hub)
 struct DashboardView: View {
     @EnvironmentObject var store: AppStore
     @State private var showAccounts = false
     @State private var showBudgets = false
     @State private var showGoals = false
 
+    // Game stats (derived from real data)
+    var totalXP: Int { Int(abs(store.totalBalance)) * 10 }
+    var currentLevel: Int { LevelSystem.levelForXP(totalXP) }
+    var xpProgress: Double { LevelSystem.xpProgress(totalXP) }
+    var streak: Int { calculateStreak() }
+    var combo: Int { streak > 2 ? streak : 1 }
+
     var body: some View {
         NavigationStack {
             ZStack {
-                // Deep gradient background
-                AppTheme.backgroundPrimary
-                    .ignoresSafeArea()
+                GameTheme.darkBackground.ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 20) {
-                        // Balance Summary (Hero Card)
-                        BalanceSummaryCard()
+                    VStack(spacing: 16) {
+                        // Player Stats Header
+                        PlayerStatsHeader()
+                        
+                        // XP Progress Bar
+                        XPProgressBar(
+                            level: currentLevel,
+                            currentXP: totalXP,
+                            nextLevelXP: LevelSystem.xpForLevel(currentLevel + 1),
+                            progress: xpProgress
+                        )
+                        .padding(.horizontal)
+                        
+                        // Energy Bar (Budget)
+                        EnergyBar(
+                            current: store.monthlyExpenses,
+                            max: store.monthlyBudget > 0 ? store.monthlyBudget : 3000,
+                            label: "Daily Energy"
+                        )
+                        .padding(.horizontal)
                         
                         // Quick Stats Row
-                        QuickStatsRow()
+                        HStack(spacing: 12) {
+                            StatCardGame(
+                                title: "Gold",
+                                value: formatCurrency(store.totalBalance),
+                                icon: "dollarsign.circle.fill",
+                                color: GameTheme.neonYellow
+                            )
+                            StatCardGame(
+                                title: "Streak",
+                                value: "\(streak)",
+                                icon: StreakSystem.streakIcon(for: streak),
+                                color: streak >= 7 ? GameTheme.neonOrange : GameTheme.neonCyan
+                            )
+                            StatCardGame(
+                                title: "Combo",
+                                value: "x\(combo)",
+                                icon: "bolt.fill",
+                                color: GameTheme.neonMagenta
+                            )
+                        }
+                        .padding(.horizontal)
                         
-                        // Quick Actions
+                        // Quick Actions (Quests)
                         QuickActionsCard(showTransferSheet: .constant(false))
                         
-                        // Recent Transactions
+                        // Recent Transactions (Loot Log)
                         RecentTransactionsCard()
                         
-                        // Budget Progress
+                        // Budget Progress (Mission Progress)
                         BudgetProgressView()
                         
-                        // Goals Overview
+                        // Goals Overview (Achievements)
                         GoalsOverviewCard(showGoals: $showGoals)
                     }
-                    .padding()
+                    .padding(.vertical)
                 }
             }
-            .navigationTitle("DailyExpenseAIPro")
+            .navigationTitle("Quest Hub")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(AppTheme.backgroundSecondary, for: .navigationBar)
+            .toolbarBackground(GameTheme.cardBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
@@ -100,8 +142,8 @@ struct DashboardView: View {
                     Button {
                         showAccounts = true
                     } label: {
-                        Image(systemName: "creditcard.fill")
-                            .foregroundColor(AppTheme.primaryCyan)
+                        Image(systemName: "backpack.fill")
+                            .foregroundColor(GameTheme.neonCyan)
                     }
                 }
             }
@@ -116,139 +158,178 @@ struct DashboardView: View {
             }
         }
     }
+    
+    private func calculateStreak() -> Int {
+        // Simple streak: consecutive days with transactions
+        let calendar = Calendar.current
+        var streak = 0
+        let sorted = store.transactions.sorted { $0.date > $1.date }
+        var lastDate: Date?
+        
+        for transaction in sorted {
+            let day = calendar.startOfDay(for: transaction.date)
+            if let last = lastDate {
+                let diff = calendar.dateComponents([.day], from: calendar.startOfDay(for: last), to: day).day ?? 0
+                if diff <= 1 {
+                    streak += 1
+                } else {
+                    break
+                }
+            } else {
+                streak = 1
+            }
+            lastDate = day
+        }
+        return streak
+    }
+
+    private func formatCurrency(_ amount: Double) -> String {
+        return "$" + String(format: "%.0f", abs(amount))
+    }
 }
 
-// MARK: - Balance Summary Card (Futuristic)
-struct BalanceSummaryCard: View {
+// MARK: - Player Stats Header
+struct PlayerStatsHeader: View {
     @EnvironmentObject var store: AppStore
-
+    
+    var totalXP: Int { Int(abs(store.totalBalance)) * 10 }
+    var currentLevel: Int { LevelSystem.levelForXP(totalXP) }
+    
     var body: some View {
-        VStack(spacing: 20) {
-            // Glowing balance
-            VStack(spacing: 8) {
-                Text("Total Balance")
-                    .font(.subheadline)
-                    .foregroundColor(AppTheme.textSecondary)
-                
-                Text(formatCurrency(store.totalBalance))
-                    .font(.system(size: 48, weight: .bold, design: .rounded))
-                    .foregroundStyle(
+        HStack(spacing: 16) {
+            // Avatar
+            ZStack {
+                Circle()
+                    .fill(
                         LinearGradient(
-                            colors: [AppTheme.primaryCyan, AppTheme.primaryBlue],
+                            colors: [GameTheme.neonCyan, GameTheme.neonPurple],
                             startPoint: .top,
                             endPoint: .bottom
                         )
                     )
-                    .neonGlow(color: AppTheme.primaryCyan)
+                    .frame(width: 60, height: 60)
+                    .shadow(color: GameTheme.neonCyan.opacity(0.5), radius: 10)
+                
+                Image(systemName: "person.fill")
+                    .font(.system(size: 28))
+                    .foregroundStyle(GameTheme.darkBackground)
             }
             
-            // Income/Expense Row
-            HStack(spacing: 30) {
-                // Income
-                VStack(spacing: 6) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "arrow.down.circle.fill")
-                            .foregroundStyle(AppTheme.success)
-                        Text("Income")
-                            .font(.caption)
-                            .foregroundColor(AppTheme.textSecondary)
-                    }
-                    Text(formatCurrency(store.monthlyIncome))
-                        .font(.headline)
-                        .foregroundStyle(AppTheme.success)
-                }
+            VStack(alignment: .leading, spacing: 4) {
+                Text("FINANCE HERO")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundStyle(GameTheme.textPrimary)
                 
-                // Divider
-                RoundedRectangle(cornerRadius: 1)
-                    .fill(AppTheme.textSecondary.opacity(0.3))
-                    .frame(width: 1, height: 30)
+                Text("Level \(currentLevel) \(levelTitle)")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(levelColor)
                 
-                // Expenses
-                VStack(spacing: 6) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "arrow.up.circle.fill")
-                            .foregroundStyle(AppTheme.error)
-                        Text("Expenses")
-                            .font(.caption)
-                            .foregroundColor(AppTheme.textSecondary)
-                    }
-                    Text(formatCurrency(store.monthlyExpenses))
-                        .font(.headline)
-                        .foregroundStyle(AppTheme.error)
+                HStack(spacing: 4) {
+                    Image(systemName: "star.fill")
+                        .font(.system(size: 10))
+                    Text("\(totalXP) Total XP")
+                        .font(.system(size: 10))
                 }
+                .foregroundStyle(GameTheme.textSecondary)
             }
             
-            // Weekly/Today row
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("This Week")
-                        .font(.caption)
-                        .foregroundColor(AppTheme.textSecondary)
-                    Text(formatCurrency(store.weeklyExpenses))
-                        .font(.subheadline.bold())
-                        .foregroundStyle(AppTheme.primaryCyan)
-                }
+            Spacer()
+            
+            // Rank badge
+            VStack(spacing: 4) {
+                Image(systemName: rankIcon)
+                    .font(.system(size: 28))
+                    .foregroundStyle(rankColor)
+                    .shadow(color: rankColor.opacity(0.5), radius: 6)
                 
-                Spacer()
-                
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text("Today")
-                        .font(.caption)
-                        .foregroundColor(AppTheme.textSecondary)
-                    Text(formatCurrency(store.todayExpenses))
-                        .font(.subheadline.bold())
-                        .foregroundColor(store.todayExpenses > 0 ? AppTheme.error : AppTheme.textSecondary)
-                }
+                Text(rankTitle)
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundStyle(rankColor)
             }
-            .padding(.top, 4)
         }
-        .padding(24)
-        .glassBackground()
+        .padding(16)
+        .gameCard(glow: GameTheme.neonCyan)
+        .padding(.horizontal)
     }
-
-    private func formatCurrency(_ amount: Double) -> String {
-        return "$" + String(format: "%.2f", abs(amount))
+    
+    var levelTitle: String {
+        switch currentLevel {
+        case 0..<5: return "Novice"
+        case 5..<10: return "Apprentice"
+        case 10..<20: return "Journeyman"
+        case 20..<30: return "Expert"
+        case 30..<50: return "Master"
+        default: return "Legend"
+        }
+    }
+    
+    var levelColor: LinearGradient {
+        switch currentLevel {
+        case 0..<5: return LinearGradient(colors: [GameTheme.neonCyan, GameTheme.xpBlue], startPoint: .leading, endPoint: .trailing)
+        case 5..<10: return LinearGradient(colors: [GameTheme.xpBlue, GameTheme.xpPurple], startPoint: .leading, endPoint: .trailing)
+        case 10..<20: return LinearGradient(colors: [GameTheme.xpPurple, GameTheme.neonMagenta], startPoint: .leading, endPoint: .trailing)
+        case 20..<30: return LinearGradient(colors: [GameTheme.neonMagenta, GameTheme.xpGold], startPoint: .leading, endPoint: .trailing)
+        default: return LinearGradient(colors: [GameTheme.xpGold, GameTheme.xpLegendary], startPoint: .leading, endPoint: .trailing)
+        }
+    }
+    
+    var rankTitle: String {
+        switch currentLevel {
+        case 0..<5: return "E"
+        case 5..<10: return "D"
+        case 10..<20: return "C"
+        case 20..<30: return "B"
+        case 30..<50: return "A"
+        default: return "S"
+        }
+    }
+    
+    var rankIcon: String {
+        switch currentLevel {
+        case 0..<5: return "shield.fill"
+        case 5..<10: return "shield.fill"
+        case 10..<20: return "star.fill"
+        case 20..<30: return "crown.fill"
+        default: return "sparkles"
+        }
+    }
+    
+    var rankColor: Color {
+        switch currentLevel {
+        case 0..<5: return GameTheme.neonCyan
+        case 5..<10: return GameTheme.xpBlue
+        case 10..<20: return GameTheme.xpPurple
+        case 20..<30: return GameTheme.neonMagenta
+        default: return GameTheme.xpGold
+        }
     }
 }
 
-// MARK: - Quick Stats Row (Futuristic)
-struct QuickStatsRow: View {
-    @EnvironmentObject var store: AppStore
-
-    var body: some View {
-        HStack(spacing: 12) {
-            StatCard(title: "Accounts", value: "\(store.accounts.count)", icon: "creditcard.fill", color: AppTheme.primaryBlue)
-            StatCard(title: "Transactions", value: "\(store.transactions.count)", icon: "list.bullet", color: AppTheme.primaryPurple)
-            StatCard(title: "Goals", value: "\(store.goals.count)", icon: "star.fill", color: AppTheme.primaryPink)
-        }
-    }
-}
-
-// MARK: - Stat Card (Futuristic)
-struct StatCard: View {
+// MARK: - Stat Card Game Style
+struct StatCardGame: View {
     let title: String
     let value: String
     let icon: String
     let color: Color
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.title2)
+                .font(.system(size: 20))
                 .foregroundStyle(color)
-                .neonGlow(color: color)
+                .shadow(color: color.opacity(0.5), radius: 6)
             
             Text(value)
-                .font(.title3.bold())
-                .foregroundStyle(AppTheme.textPrimary)
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundStyle(GameTheme.textPrimary)
             
             Text(title)
-                .font(.caption2)
-                .foregroundColor(AppTheme.textSecondary)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundStyle(GameTheme.textSecondary)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
-        .glassBackground()
+        .padding(.vertical, 14)
+        .gameCard(glow: color)
     }
 }
 
