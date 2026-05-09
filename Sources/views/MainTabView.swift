@@ -87,9 +87,10 @@ struct DashboardView: View {
                         .padding(.horizontal)
                         
                         // Energy Bar (Budget)
+                        let totalMonthlyBudget = store.budgets.filter { $0.period == .monthly }.reduce(0) { $0 + $1.amount }
                         EnergyBar(
                             current: store.monthlyExpenses,
-                            max: store.monthlyBudget > 0 ? store.monthlyBudget : 3000,
+                            max: totalMonthlyBudget > 0 ? totalMonthlyBudget : 3000,
                             label: "Daily Energy"
                         )
                         .padding(.horizontal)
