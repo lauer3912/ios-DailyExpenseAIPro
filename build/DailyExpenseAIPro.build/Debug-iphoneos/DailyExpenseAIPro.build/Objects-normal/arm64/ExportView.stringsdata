@@ -1,0 +1,64 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/ExportView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Export",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exported data can be imported into spreadsheets or other financial apps",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 80
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export Data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export all your transactions, accounts, budgets, and goals as CSV files",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "CSV Preview (first 5 transactions)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export as CSV",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 89
+        }
+      }
+    ]
+  },
+  "version": 1
+}

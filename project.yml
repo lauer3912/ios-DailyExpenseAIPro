@@ -14,6 +14,9 @@ settings:
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 9L6N2ZF26B
     ENABLE_USER_SCRIPT_SANDBOXING: NO
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    ASSETCATALOG_COMPILER_THINNING_MODE: None
 
 targets:
   DailyExpenseAIPro:
@@ -23,18 +26,20 @@ targets:
       - path: Sources
         excludes:
           - "**/.DS_Store"
+      - path: Assets.xcassets
+        excludes:
+          - "**/.DS_Store"
     settings:
       base:
         INFOPLIST_FILE: Sources/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.DailyExpenseAIPro
         PRODUCT_NAME: DailyExpenseAIPro
-        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         GENERATE_INFOPLIST_FILE: NO
         SWIFT_EMIT_LOC_STRINGS: YES
         CODE_SIGN_ENTITLEMENTS: Sources/DailyExpenseAIPro.entitlements
         CODE_SIGNING_ALLOWED: NO
         DEVELOPMENT_TEAM: 9L6N2ZF26B
+        ASSETCATALOG_COMPILER_THINNING_MODE: None
       configs:
         Debug:
           CODE_SIGNING_ALLOWED: NO
@@ -70,12 +75,12 @@ schemes:
         DailyExpenseAIProUITests: all
     run:
       config: Debug
-    archive:
-      config: Release
     test:
       config: Debug
       targets:
         - DailyExpenseAIProUITests
+    archive:
+      config: Release
     profile:
       config: Release
   DailyExpenseAIProUITests:

@@ -1,0 +1,136 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/ImportView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Import",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import transactions from a CSV file previously exported from this app",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 27
+        }
+      },
+      {
+        "comment": "",
+        "key": "CSV Format",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "Required columns:",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "Date, Type, Category, Amount, Note, Account",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "Example:",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "2026-01-15 10:30, expense, Food & Dining, 45.50, Lunch, Cash",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 55
+        }
+      },
+      {
+        "comment": "",
+        "key": "or paste CSV content below",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 80
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select CSV File",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preview Import",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 99
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 129
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preview Import",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 291
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld transactions will be imported",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 245
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirm Import",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 281
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 295
+        }
+      }
+    ]
+  },
+  "version": 1
+}

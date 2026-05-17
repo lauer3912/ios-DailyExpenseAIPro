@@ -1,0 +1,40 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/QuickActionsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Quick Actions",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 10
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recent Transactions",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 86
+        }
+      },
+      {
+        "comment": "",
+        "key": "View All",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 94
+        }
+      },
+      {
+        "comment": "",
+        "key": "·",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 156
+        }
+      }
+    ]
+  },
+  "version": 1
+}

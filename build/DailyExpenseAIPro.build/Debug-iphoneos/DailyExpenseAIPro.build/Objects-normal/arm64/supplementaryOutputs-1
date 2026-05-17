@@ -1,0 +1,23 @@
+{
+  "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AccountsView.swift" : {
+    "const-values" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AccountsView.swiftconstvalues",
+    "dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AccountsView.d",
+    "diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AccountsView.dia",
+    "object" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AccountsView.o",
+    "swift-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AccountsView.swiftdeps"
+  },
+  "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AddTransactionView.swift" : {
+    "const-values" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AddTransactionView.swiftconstvalues",
+    "dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AddTransactionView.d",
+    "diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AddTransactionView.dia",
+    "object" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AddTransactionView.o",
+    "swift-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AddTransactionView.swiftdeps"
+  },
+  "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AnalyticsView.swift" : {
+    "const-values" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AnalyticsView.swiftconstvalues",
+    "dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AnalyticsView.d",
+    "diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AnalyticsView.dia",
+    "object" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AnalyticsView.o",
+    "swift-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIPro.build/Objects-normal/arm64/AnalyticsView.swiftdeps"
+  }
+}

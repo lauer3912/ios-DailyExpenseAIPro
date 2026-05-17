@@ -1,0 +1,120 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/TransferView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Transfer",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 172
+        }
+      },
+      {
+        "comment": "",
+        "key": "Transfer Amount",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "From",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "To",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "Note (optional)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 88
+        }
+      },
+      {
+        "comment": "",
+        "key": "Transfer note...",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 92
+        }
+      },
+      {
+        "comment": "",
+        "key": "From",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "To",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 113
+        }
+      },
+      {
+        "comment": "",
+        "key": "After Transfer",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insufficient funds in %@",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 147
+        }
+      },
+      {
+        "comment": "",
+        "key": "Transfer",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 160
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 176
+        }
+      }
+    ]
+  },
+  "version": 1
+}

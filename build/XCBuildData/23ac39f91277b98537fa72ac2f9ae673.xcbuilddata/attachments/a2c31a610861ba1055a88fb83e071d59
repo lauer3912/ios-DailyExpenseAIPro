@@ -1,0 +1,19 @@
+{
+  "" : {
+    "diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/DailyExpenseAIProUITests-primary.dia",
+    "emit-module-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/DailyExpenseAIProUITests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/DailyExpenseAIProUITests-primary-emit-module.dia",
+    "pch" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/DailyExpenseAIProUITests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/DailyExpenseAIProUITests-primary.swiftdeps"
+  },
+  "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/UITests/ScreenshotTests.swift" : {
+    "const-values" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.swiftconstvalues",
+    "dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.d",
+    "diagnostics" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.dia",
+    "index-unit-output-path" : "/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.o",
+    "llvm-bc" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.bc",
+    "object" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.o",
+    "swift-dependencies" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests.swiftdeps",
+    "swiftmodule" : "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/DailyExpenseAIPro.build/Debug-iphoneos/DailyExpenseAIProUITests.build/Objects-normal/arm64/ScreenshotTests~partial.swiftmodule"
+  }
+}

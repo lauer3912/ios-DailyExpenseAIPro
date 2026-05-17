@@ -1,0 +1,168 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AccountsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Accounts",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 87
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Net Worth",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "No asset accounts",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Assets",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "No liability accounts",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "Liabilities",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "Summary",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 84
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 91
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Account",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 258
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Account",
+        "location": {
+          "startingColumn": 59,
+          "startingLine": 258
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account Name",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 217
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 220
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 221
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account Type",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 227
+        }
+      },
+      {
+        "comment": "",
+        "key": "Color",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 251
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes (optional)",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 255
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 262
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 268
+        }
+      }
+    ]
+  },
+  "version": 1
+}

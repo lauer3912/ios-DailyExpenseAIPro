@@ -1,0 +1,208 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/RecurringTransactionsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Recurring",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Recurring Transactions",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Set up recurring transactions for regular income or expenses",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Recurring",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 27
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "Active Recurring Transactions",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "Income",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Expense",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Recurring",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Recurring",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "Type",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Expense",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 157
+        }
+      },
+      {
+        "comment": "",
+        "key": "Income",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 163
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 165
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 166
+        }
+      },
+      {
+        "comment": "",
+        "key": "Frequency",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 173
+        }
+      },
+      {
+        "comment": "",
+        "key": "Schedule",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 203
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Account",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 204
+        }
+      },
+      {
+        "comment": "",
+        "key": "Note (optional)",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 213
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 220
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 226
+        }
+      }
+    ]
+  },
+  "version": 1
+}

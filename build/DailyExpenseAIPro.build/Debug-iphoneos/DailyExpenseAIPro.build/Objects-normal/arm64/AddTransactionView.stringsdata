@@ -1,0 +1,152 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AddTransactionView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Add Transaction",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 192
+        }
+      },
+      {
+        "comment": "",
+        "key": "Type",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Expense",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "Income",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 31
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 88
+        }
+      },
+      {
+        "comment": "",
+        "key": "Date",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 112
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 135
+        }
+      },
+      {
+        "comment": "",
+        "key": "Note",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 146
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add a note...",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recurring Transaction",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Frequency",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 174
+        }
+      },
+      {
+        "comment": "",
+        "key": "Frequency",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 178
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 196
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 202
+        }
+      }
+    ]
+  },
+  "version": 1
+}

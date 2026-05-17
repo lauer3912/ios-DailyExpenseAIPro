@@ -1,0 +1,256 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/BudgetsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Budgets",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 138
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Budgeted",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Spent",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%% used",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Budgets Set",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 90
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add budgets to track your spending by category",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create Budget",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 98
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 117
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category Budgets",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 123
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%% used",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 263
+        }
+      },
+      {
+        "comment": "",
+        "key": "Budget rolls over",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 285
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Budget",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 415
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Budget",
+        "location": {
+          "startingColumn": 58,
+          "startingLine": 415
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 367
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 340
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 350
+        }
+      },
+      {
+        "comment": "",
+        "key": "Budget Amount",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 358
+        }
+      },
+      {
+        "comment": "",
+        "key": "$",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 360
+        }
+      },
+      {
+        "comment": "",
+        "key": "0.00",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 361
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 381
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 387
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rollover Unused Budget",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 395
+        }
+      },
+      {
+        "comment": "",
+        "key": "When enabled, any unused budget will carry over to the next period.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 397
+        }
+      },
+      {
+        "comment": "",
+        "key": "Alert Threshold: %lld%%",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 402
+        }
+      },
+      {
+        "comment": "",
+        "key": "You'll be notified when spending reaches this percentage of your budget",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 407
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notifications",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 412
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 419
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 425
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Category",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 492
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,320 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 219
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete All Data",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 238
+        }
+      },
+      {
+        "comment": "",
+        "key": "Dark Mode",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Appearance",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enable Notifications",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "Test Notification",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notifications",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Currency",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preferences",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Manage Accounts",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "Manage Budgets",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 86
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 88
+        }
+      },
+      {
+        "comment": "",
+        "key": "Savings Goals",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 105
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recurring Transactions",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 120
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Finance Management",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 132
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export Data (CSV)",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 140
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Data (CSV)",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 146
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "Free Plan",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "Premium Status",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 155
+        }
+      },
+      {
+        "comment": "",
+        "key": "Upgrade to Premium",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 165
+        }
+      },
+      {
+        "comment": "",
+        "key": "Restore Purchases",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 172
+        }
+      },
+      {
+        "comment": "",
+        "key": "Subscription",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 175
+        }
+      },
+      {
+        "comment": "",
+        "key": "Privacy Policy",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 181
+        }
+      },
+      {
+        "comment": "",
+        "key": "Terms of Service",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 185
+        }
+      },
+      {
+        "comment": "",
+        "key": "1.0.0",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "Version",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "1",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 198
+        }
+      },
+      {
+        "comment": "",
+        "key": "Build",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 196
+        }
+      },
+      {
+        "comment": "",
+        "key": "About",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 202
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete All Data",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 210
+        }
+      },
+      {
+        "comment": "",
+        "key": "Danger Zone",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 214
+        }
+      },
+      {
+        "comment": "",
+        "key": "This will permanently delete all your transactions, accounts, budgets, and goals. This action cannot be undone.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 239
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Everything",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "This will permanently delete ALL your data including transactions, accounts, budgets, and goals. This cannot be undone.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 244
+        }
+      }
+    ]
+  },
+  "version": 1
+}

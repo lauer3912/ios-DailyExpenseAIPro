@@ -1,0 +1,192 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/AnalyticsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Analytics",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chart",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Net Balance",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Spending by Category",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 79
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category Breakdown",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "Spending Trend",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 119
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%lld",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 143
+        }
+      },
+      {
+        "comment": "",
+        "key": "Top Spending Days",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld transactions",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 166
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 291
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 340
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 341
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 356
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 383
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 384
+        }
+      },
+      {
+        "comment": "",
+        "key": "Period",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 390
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amount",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 391
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 408
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 468
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 472
+        }
+      }
+    ]
+  },
+  "version": 1
+}

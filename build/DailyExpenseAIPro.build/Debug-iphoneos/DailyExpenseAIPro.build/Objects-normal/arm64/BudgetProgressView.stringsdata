@@ -1,0 +1,80 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/BudgetProgressView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Budget Progress",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 10
+        }
+      },
+      {
+        "comment": "",
+        "key": "View All",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "No budgets set",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create Budget",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "Savings Goals",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "View All",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 130
+        }
+      },
+      {
+        "comment": "",
+        "key": "No goals set",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create Goal",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 146
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 207
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,80 @@
+{
+  "source": "/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/Sources/views/TransactionListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Transactions",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 163
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Transaction",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 164
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search transactions...",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "All Categories",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "Category",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 84
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 55,
+          "startingLine": 147
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 165
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 166
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete this transaction? This cannot be undone.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 172
+        }
+      }
+    ]
+  },
+  "version": 1
+}

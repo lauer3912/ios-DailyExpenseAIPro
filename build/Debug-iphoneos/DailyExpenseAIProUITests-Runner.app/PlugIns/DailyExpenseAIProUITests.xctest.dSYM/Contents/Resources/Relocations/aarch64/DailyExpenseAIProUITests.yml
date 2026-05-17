@@ -1,0 +1,48 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Volumes/Macintosh_HD/Users/user291981/Desktop/ios-DailyExpenseAIPro/build/Debug-iphoneos/DailyExpenseAIProUITests-Runner.app/PlugIns/DailyExpenseAIProUITests.xctest/DailyExpenseAIProUITests'
+relocations:
+  - { offset: 0x57F67, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvpfi', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x8 }
+  - { offset: 0x57F7F, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvpfi', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x8 }
+  - { offset: 0x58295, size: 0x8, addend: 0x0, symName: '_$sSo15XCUIApplicationCMa', symObjAddr: 0x584, symBinAddr: 0x4584, symSize: 0x60 }
+  - { offset: 0x582A9, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledNameV2, symObjAddr: 0x75C, symBinAddr: 0x475C, symSize: 0x80 }
+  - { offset: 0x582BD, size: 0x8, addend: 0x0, symName: '_$sSo13XCTAttachmentCMa', symObjAddr: 0xDEC, symBinAddr: 0x4DEC, symSize: 0x60 }
+  - { offset: 0x582D1, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCfETo', symObjAddr: 0x26D0, symBinAddr: 0x66D0, symSize: 0x30 }
+  - { offset: 0x582FF, size: 0x8, addend: 0x0, symName: '_$sSo15XCUIApplicationCSgWOh', symObjAddr: 0x2700, symBinAddr: 0x6700, symSize: 0x30 }
+  - { offset: 0x58313, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCMa', symObjAddr: 0x2730, symBinAddr: 0x6730, symSize: 0x24 }
+  - { offset: 0x58327, size: 0x8, addend: 0x0, symName: '_$sSa12_endMutationyyF', symObjAddr: 0x2774, symBinAddr: 0x6774, symSize: 0xC }
+  - { offset: 0x58361, size: 0x8, addend: 0x0, symName: '_$ss27_finalizeUninitializedArrayySayxGABnlF', symObjAddr: 0x610, symBinAddr: 0x4610, symSize: 0x40 }
+  - { offset: 0x583D5, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvgTo', symObjAddr: 0x8, symBinAddr: 0x4008, symSize: 0x58 }
+  - { offset: 0x583E9, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvg', symObjAddr: 0x60, symBinAddr: 0x4060, symSize: 0x6C }
+  - { offset: 0x58414, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvsTo', symObjAddr: 0xCC, symBinAddr: 0x40CC, symSize: 0x64 }
+  - { offset: 0x58428, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvs', symObjAddr: 0x130, symBinAddr: 0x4130, symSize: 0x94 }
+  - { offset: 0x5845B, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvM', symObjAddr: 0x1C4, symBinAddr: 0x41C4, symSize: 0x50 }
+  - { offset: 0x5847F, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC3appSo15XCUIApplicationCSgvM.resume.0', symObjAddr: 0x214, symBinAddr: 0x4214, symSize: 0x3C }
+  - { offset: 0x584A0, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC14setUpWithErroryyKF', symObjAddr: 0x250, symBinAddr: 0x4250, symSize: 0x334 }
+  - { offset: 0x58514, size: 0x8, addend: 0x0, symName: '_$sSo15XCUIApplicationCABycfC', symObjAddr: 0x5E4, symBinAddr: 0x45E4, symSize: 0x2C }
+  - { offset: 0x5854A, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC14setUpWithErroryyKFTo', symObjAddr: 0x650, symBinAddr: 0x4650, symSize: 0x10C }
+  - { offset: 0x5855E, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC17tearDownWithErroryyKF', symObjAddr: 0x7DC, symBinAddr: 0x47DC, symSize: 0x11C }
+  - { offset: 0x58582, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC17tearDownWithErroryyKFTo', symObjAddr: 0x8F8, symBinAddr: 0x48F8, symSize: 0x10C }
+  - { offset: 0x58596, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC26testiPhone_69_01_DashboardyyKF', symObjAddr: 0xA04, symBinAddr: 0x4A04, symSize: 0x3E8 }
+  - { offset: 0x58602, size: 0x8, addend: 0x0, symName: '_$sSo13XCTAttachmentC10screenshotABSo14XCUIScreenshotC_tcfCTO', symObjAddr: 0xE4C, symBinAddr: 0x4E4C, symSize: 0x58 }
+  - { offset: 0x5862B, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC26testiPhone_69_01_DashboardyyKFTo', symObjAddr: 0xEA4, symBinAddr: 0x4EA4, symSize: 0x10C }
+  - { offset: 0x5863F, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC29testiPhone_69_02_TransactionsyyKF', symObjAddr: 0xFB0, symBinAddr: 0x4FB0, symSize: 0x3EC }
+  - { offset: 0x586A1, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC29testiPhone_69_02_TransactionsyyKFTo', symObjAddr: 0x139C, symBinAddr: 0x539C, symSize: 0x10C }
+  - { offset: 0x586B5, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC31testiPhone_69_03_AddTransactionyyKF', symObjAddr: 0x14A8, symBinAddr: 0x54A8, symSize: 0x3EC }
+  - { offset: 0x58717, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC31testiPhone_69_03_AddTransactionyyKFTo', symObjAddr: 0x1894, symBinAddr: 0x5894, symSize: 0x10C }
+  - { offset: 0x5872B, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC26testiPhone_69_04_AnalyticsyyKF', symObjAddr: 0x19A0, symBinAddr: 0x59A0, symSize: 0x3EC }
+  - { offset: 0x5878D, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC26testiPhone_69_04_AnalyticsyyKFTo', symObjAddr: 0x1D8C, symBinAddr: 0x5D8C, symSize: 0x10C }
+  - { offset: 0x587A1, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC25testiPhone_69_05_SettingsyyKF', symObjAddr: 0x1E98, symBinAddr: 0x5E98, symSize: 0x3EC }
+  - { offset: 0x58803, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC25testiPhone_69_05_SettingsyyKFTo', symObjAddr: 0x2284, symBinAddr: 0x6284, symSize: 0x10C }
+  - { offset: 0x5881E, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC10invocationACSo12NSInvocationCSg_tcfC', symObjAddr: 0x2390, symBinAddr: 0x6390, symSize: 0x50 }
+  - { offset: 0x58832, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC10invocationACSo12NSInvocationCSg_tcfc', symObjAddr: 0x23E0, symBinAddr: 0x63E0, symSize: 0xA8 }
+  - { offset: 0x58880, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC10invocationACSo12NSInvocationCSg_tcfcTo', symObjAddr: 0x2488, symBinAddr: 0x6488, symSize: 0x40 }
+  - { offset: 0x58894, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC8selectorAC10ObjectiveC8SelectorV_tcfC', symObjAddr: 0x24C8, symBinAddr: 0x64C8, symSize: 0x34 }
+  - { offset: 0x588A8, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC8selectorAC10ObjectiveC8SelectorV_tcfc', symObjAddr: 0x24FC, symBinAddr: 0x64FC, symSize: 0x9C }
+  - { offset: 0x588D9, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsC8selectorAC10ObjectiveC8SelectorV_tcfcTo', symObjAddr: 0x2598, symBinAddr: 0x6598, symSize: 0x24 }
+  - { offset: 0x588ED, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCACycfC', symObjAddr: 0x25BC, symBinAddr: 0x65BC, symSize: 0x24 }
+  - { offset: 0x58901, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCACycfc', symObjAddr: 0x25E0, symBinAddr: 0x65E0, symSize: 0x88 }
+  - { offset: 0x58925, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCACycfcTo', symObjAddr: 0x2668, symBinAddr: 0x6668, symSize: 0x20 }
+  - { offset: 0x58939, size: 0x8, addend: 0x0, symName: '_$s24DailyExpenseAIProUITests15ScreenshotTestsCfD', symObjAddr: 0x2688, symBinAddr: 0x6688, symSize: 0x48 }
+  - { offset: 0x5895D, size: 0x8, addend: 0x0, symName: '_$sSo15XCUIApplicationCABycfcTO', symObjAddr: 0x2754, symBinAddr: 0x6754, symSize: 0x20 }
+...
