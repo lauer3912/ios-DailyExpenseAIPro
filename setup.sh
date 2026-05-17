@@ -16,31 +16,6 @@ fi
 echo "📦 Generating Xcode project with xcodegen..."
 xcodegen
 
-# Create Configs directory
-mkdir -p Configs
-
-# Create Debug.xcconfig
-cat > Configs/Debug.xcconfig << 'DEBUG_EOF'
-#include "Pods/Target Support Files/Pods-DailyExpenseAIPro/Pods-DailyExpenseAIPro.debug.xcconfig"
-SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
-DEBUG_EOF
-
-# Create Release.xcconfig
-cat > Configs/Release.xcconfig << 'RELEASE_EOF'
-#include "Pods/Target Support Files/Pods-DailyExpenseAIPro/Pods-DailyExpenseAIPro.release.xcconfig"
-SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule"
-RELEASE_EOF
-
-# Install CocoaPods dependencies (if needed)
-if [ -f "Podfile" ]; then
-    echo "📦 Installing CocoaPods dependencies..."
-    pod install
-fi
-
-# Set team in project
-echo "🔧 Configuring development team..."
-/usr/libexec/PlistBuddy -c "Set :objects:$(grep -A1 'DEVELOPMENT_TEAM' DailyExpenseAIPro.xcodeproj/project.pbxproj | tail -1 | cut -d' ' -f1 | tr -d ';'):value 9L6N2ZF26B" DailyExpenseAIPro.xcodeproj/project.pbxproj 2>/dev/null || true
-
 # Open project
 echo "✅ Setup complete!"
 echo "Opening DailyExpenseAIPro.xcodeproj..."
@@ -51,5 +26,4 @@ echo "📝 Next steps:"
 echo "   1. Build the project (Cmd+B)"
 echo "   2. Run on simulator (Cmd+R)"
 echo "   3. Configure signing in Xcode"
-echo "   4. Add app icons in Assets.xcassets"
-echo "   5. Test on device"
+echo "   4. Test on device"

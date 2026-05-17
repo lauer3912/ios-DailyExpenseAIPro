@@ -1,187 +1,192 @@
-# DailyExpenseAIPro — 记账预算 App
+# DailyExpenseAIPro — Specification Document
 
-## 基本信息
-- **名称**: DailyExpenseAIPro
+## Basic Info
+- **Name**: DailyExpenseAIPro
 - **Bundle ID**: com.ggsheng.DailyExpenseAIPro
-- **平台**: iOS 17.0+
-- **语言**: Swift 5.9
-- **框架**: SwiftUI, CoreData, CoreML (基础)
-- **目标市场**: 欧美客户
-- **变现模式**: Freemium + 订阅制
-  - Free: 基础记账 (2账户，基础报表)
-  - Premium: $4.99/月 或 $39.99/年 (无限账户，云同步，OCR，AI洞察，Widget高级，Apple Watch)
+- **Platform**: iOS 17.0+
+- **Language**: Swift 5.9
+- **Frameworks**: SwiftUI, UserDefaults, WidgetKit, Swift Charts
+- **Target Market**: Global (Western customers priority)
+- **Revenue Model**: Freemium + Subscription
+  - Free: Basic tracking (2 accounts, basic reports)
+  - Premium: $4.99/month or $39.99/year (unlimited accounts, cloud sync, AI insights, advanced widgets, Apple Watch)
 
-## 🎯 核心功能 (50+)
+## 🎯 Core Features (70+)
 
-### 1. 基础记账
-1. 快速记录收入
-2. 快速记录支出
-3. 分类选择 (自定义图标)
-4. 金额输入
-5. 日期时间选择
-6. 货币选择 (多币种)
-7. 备注/标签
-8. 位置记录
-9. 附件上传 (照片/收据)
-10. 语音输入
+### 1. Transaction Recording
+1. Quick income recording
+2. Quick expense recording
+3. Category selection (custom icons)
+4. Amount entry with numpad
+5. Date/time picker
+6. Multi-currency support
+7. Notes/tags field
+8. Location recording
+9. Photo/receipt attachment
+10. Voice input (Premium)
 
-### 2. 账户管理
-11. 多账户支持 (现金/银行卡/信用卡)
-12. 账户余额追踪
-13. 账户间转账
-14. 负债账户 (信用卡/贷款)
-15. 投资账户
-16. 账户净资产计算
+### 2. Account Management
+11. Multi-account support (Cash/Bank/Credit/Investment)
+12. Account balance tracking with history
+13. Inter-account transfers
+14. Liability accounts (credit cards/loans)
+15. Investment accounts with portfolio value
+16. Net worth calculation (assets minus liabilities)
 
-### 3. 预算管理
-17. 月度预算设置
-18. 分类预算分配
-19. 预算进度可视化
-20. 超支警告
-21. 预算滚动/结转
-22. 周预算
-23. 自定义周期预算
+### 3. Budget Management
+17. Monthly budget setting per category
+18. Budget allocation and limits
+19. Budget progress visualization (ring/bar)
+20. Overspending alerts (push notification)
+21. Budget rollover (unused budget carries forward)
+22. Weekly budget option
+23. Custom period budget
 
-### 4. 目标储蓄
-24. 储蓄目标创建
-25. 定期自动储蓄计划
-26. 目标进度追踪
-27. 目标时间预估
-28. 紧急基金计算器
-29. 债务还款目标
-30. 目标优先级排序
+### 4. Savings Goals
+24. Savings goal creation with target amount and deadline
+25. Automatic savings plan setup
+26. Goal progress tracking (circular progress indicator)
+27. Time-to-goal estimation
+28. Emergency fund calculator
+29. Debt payoff goal tracking
+30. Goal priority ordering
 
-### 5. 报表统计
-31. 日报表
-32. 周报表
-33. 月报表
-34. 年报表
-35. 分类消费分析 (饼图/柱状图)
-36. 趋势分析 (折线图)
-37. 净现金流分析
-38. 消费类别排行
-39. 消费地点热力图
-40. 收入结构分析
+### 5. Reports & Analytics
+31. Daily report view
+32. Weekly report view
+33. Monthly report view
+34. Annual report view
+35. Category spending analysis (pie chart/bar chart)
+36. Trend analysis (line chart)
+37. Net cash flow analysis
+38. Top spending categories ranking
+39. Spending by merchant breakdown
+40. Income structure analysis
 
-### 6. 账单与订阅
-41. 周期性账单管理
-42. 账单到期提醒
-43. 订阅追踪 (自动检测)
-44. 订阅续费提醒
-45. 账单支付历史
-46. 下期账单预估
+### 6. Bills & Subscriptions
+41. Recurring bill management
+42. Bill due date reminders
+43. Subscription tracking (auto-detect recurring charges)
+44. Subscription renewal reminders
+45. Bill payment history
+46. Next bill date estimation
 
-### 7. 债务管理
-47. 债务清单
-48. 还款计划 (Snowball法)
-49. 还款计划 (Avalanche法)
-50. 利息计算器
-51. 提前还款节省计算
+### 7. Debt Management
+47. Debt inventory list
+48. Payoff plan — Snowball method (smallest balance first)
+49. Payoff plan — Avalanche method (highest interest first)
+50. Interest calculator
+51. Early repayment savings calculator
 
-### 8. 高级功能 (Premium)
-52. AI 消费洞察分析
-53. 智能预算推荐
-54. 异常消费提醒
-55. 云同步 (iCloud)
-56. 家庭共享
-57. 收据 OCR 识别
-58. 深度分类统计
-59. 自定义报表导出
-60. 高级 Widget
+### 8. Advanced Features (Premium)
+52. AI spending insights and analysis
+53. Smart budget recommendations based on habits
+54. Anomaly detection (unusual spending alerts)
+55. Cloud sync (iCloud)
+56. Family sharing (up to 6 members)
+57. Receipt OCR scanning
+58. Deep category statistics
+59. Custom report export (CSV/PDF)
+60. Advanced Widget (multiple sizes, lock screen)
 
-### 9. 辅助功能
-61. Widget (今日/小/中尺寸)
-62. Siri Shortcuts
-63. Apple Watch App
-64. Face ID/Touch ID 锁定
-65. 数据导出 (CSV, PDF)
-66. 数据导入 (CSV)
-67. 汇率换算
-68. 重复记账
-69. 模板记账
-70. 分享报表
+### 9. Auxiliary Features
+61. Home screen widget (small/medium/large)
+62. Lock screen widget showing balance
+63. Siri Shortcuts integration
+64. Apple Watch companion app
+65. Face ID / Touch ID app lock
+66. Data export (CSV, PDF)
+67. Data import (CSV)
+68. Currency converter with live rates
+69. Recurring transaction templates
+70. Share reports with friends/family
 
-## 🎨 UI 设计
+## 🎨 UI Design
 
-### 颜色主题
-#### 深色模式
-- 背景: 深炭黑 (#0D1117)
-- 卡片: 深灰蓝 (#161B22)
-- 主色调: 薄荷绿 (#00D4AA) - 收入
-- 警告色: 珊瑚红 (#FF6B6B) - 支出
-- 文字: 亮灰 (#E6EDF3)
-- 辅助文字: 浅灰 (#8B949E)
+### Color Theme
+#### Dark Mode
+- Background: Deep charcoal (#0D1117)
+- Card: Dark gray-blue (#161B22)
+- Accent (Income): Mint green (#00D4AA)
+- Accent (Expense): Coral red (#FF6B6B)
+- Text: Light gray (#E6EDF3)
+- Secondary text: Muted gray (#8B949E)
 
-#### 浅色模式
-- 背景: 暖白 (#FAFBFC)
-- 卡片: 纯白 (#FFFFFF) + 柔和阴影
-- 主色调: 深海蓝 (#006D77) - 收入
-- 警告色: 珊瑚橙 (#EF476F) - 支出
-- 文字: 深灰 (#1A1A1A)
-- 辅助文字: 中灰 (#6B7280)
+#### Light Mode
+- Background: Warm white (#FAFBFC)
+- Card: Pure white (#FFFFFF) + soft shadow
+- Accent (Income): Deep teal (#006D77)
+- Accent (Expense): Coral orange (#EF476F)
+- Text: Dark gray (#1A1A1A)
+- Secondary text: Medium gray (#6B7280)
 
-### 字体与排版
-- 主字体: SF Pro Display (标题，20pt+)
-- 副字体: SF Pro Text (正文，16-18pt)
-- 数字字体: SF Pro Text (粗体，24pt+)
+### Typography
+- Primary font: SF Pro Display (headings, 20pt+)
+- Secondary font: SF Pro Text (body, 16-18pt)
+- Numbers: SF Pro Rounded (bold, 24pt+)
 
-## 📱 屏幕布局
+## 📱 Screen Layout
 
-### 主屏幕 (Dashboard)
-- 今日收支卡片
-- 月度预算进度环
-- 快速记账按钮
-- 最近记录列表
-- 净资产显示
+### Dashboard (Home)
+- Today's income/expense summary card
+- Monthly budget progress ring
+- Quick add button (FAB)
+- Recent transactions list
+- Net worth display
+- Savings goals quick view
 
-### 记账页面
-- 收入/支出切换
-- 分类网格
-- 金额输入键盘
-- 日期/货币选择器
-- 备注输入框
-- 保存按钮
+### Add Transaction
+- Income/expense toggle
+- Category grid (icon + name)
+- Numpad for amount entry
+- Date/currency picker
+- Notes input field
+- Save button
 
-### 报表页面
-- 图表选择器
-- 时间范围选择
-- 分类消费饼图
-- 趋势折线图
-- 详情列表
+### Reports
+- Chart type selector (pie/line/bar)
+- Time range picker (week/month/year/custom)
+- Category spending pie chart
+- Trend line chart
+- Detail transaction list
 
-### 设置页面
-- 账户管理
-- 预算设置
-- 目标管理
-- 订阅管理
-- 主题切换
+### Settings
+- Account management
+- Budget configuration
+- Goal management
+- Subscription management (Premium)
+- Theme toggle (Dark/Light/System)
+- Data export/import
+- Privacy policy link
+- Contact support
 
-## 🔐 隐私与安全
-- 本地加密存储 (CoreData + 加密字段)
-- Face ID/Touch ID 解锁
-- 不收集用户个人身份信息
-- 可选择关闭数据分析
-- GDPR 合规
+## 🔐 Privacy & Security
+- Local encrypted storage (UserDefaults + Keychain for sensitive data)
+- Face ID / Touch ID app lock
+- No collection of personally identifiable information
+- Optional data analytics opt-out
+- GDPR compliant
+- COPPA compliant for family sharing
 
-## 📋 发布要求
-- 英文 Privacy Policy (必备)
-- 英文 App Store 描述
-- 截图: iPhone 6.9" + iPad 12.9"
-- 60秒操作演示视频
-- 无中文字符
+## 📋 Submission Requirements
+- English Privacy Policy (required)
+- English App Store description (4000 char max)
+- Screenshots: iPhone 6.9" (1320×2868) + iPad 13" (2048×2732)
+- Optional: 60-second demo video
+- No Chinese characters in any source files
 
-## 🎬 演示视频脚本
-0-5s: 启动页 + 主界面展示
-5-15s: 快速记账流程
-15-25s: 预算进度环动画
-25-35s: 报表图表切换
-35-45s: Widget 展示
-45-55s: 设置 & 主题切换
-55-60s: 结尾 + Logo
+## 🎬 Demo Video Script
+0-5s: App launch + dashboard showcase
+5-15s: Quick add transaction flow
+15-25s: Budget progress ring animation
+25-35s: Report charts transitions
+35-45s: Widget demonstration
+45-55s: Settings & theme switching
+55-60s: Closing + app logo
 
-## 🚀 AI 特性 (溢价核心)
-- 智能消费分析: 基于消费习惯推荐预算
-- 异常检测: 识别不合理消费
-- 趋势预测: 月度收支预测
-- 个性化建议: 省钱提示
-- 自然语言处理: "本月餐饮花了多少"
+## 🚀 AI Features (Premium Value)
+- Smart spending analysis: budget recommendations based on habits
+- Anomaly detection: flag unusual spending patterns
+- Trend prediction: monthly income/expense forecasting
+- Personalized suggestions: money-saving tips
+- Natural language query: "How much did I spend on dining this month?"
