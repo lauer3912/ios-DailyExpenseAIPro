@@ -1,0 +1,57 @@
+# Build & Test — push/PR 到 main 时编译并运行单元测试和 UI 测试
+name: Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-26
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "~26.4.0"
+
+      - name: Build & Test
+        run: |
+          mkdir -p .build
+          set +e
+          xcrun xcodebuild \
+            -project ios-DailyExpenseAIPro/DailyExpenseAIPro.xcodeproj \
+            -scheme DailyExpenseAIPro \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+            -derivedDataPath .build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            build test 2>&1 | tee .build/build.log
+          RESULT=${PIPESTATUS[0]}
+          echo "Exit code: $RESULT"
+
+          if [ $RESULT -ne 0 ]; then
+            echo "Build or test failed"
+            exit 1
+          fi
+          echo "Build and test succeeded"
+
+      - name: Upload Test Results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: .build/DerivedData
+          if-no-files-found: error

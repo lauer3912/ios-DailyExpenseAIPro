@@ -14,6 +14,7 @@ struct MainTabView: View {
                     Text("Hub")
                 }
                 .tag(0)
+                .accessibilityIdentifier("tab_hub")
 
             // Transactions (Inventory)
             TransactionListView()
@@ -22,6 +23,7 @@ struct MainTabView: View {
                     Text("Items")
                 }
                 .tag(1)
+                .accessibilityIdentifier("tab_items")
 
             // Add Button (Quest Entry)
             AddTransactionView()
@@ -31,6 +33,7 @@ struct MainTabView: View {
                     Text("Quest")
                 }
                 .tag(2)
+                .accessibilityIdentifier("tab_quest")
 
             // Analytics (Stats)
             AnalyticsView()
@@ -39,6 +42,7 @@ struct MainTabView: View {
                     Text("Stats")
                 }
                 .tag(3)
+                .accessibilityIdentifier("tab_stats")
 
             // More (Menu)
             SettingsView()
@@ -47,6 +51,7 @@ struct MainTabView: View {
                     Text("Menu")
                 }
                 .tag(4)
+                .accessibilityIdentifier("tab_menu")
         }
         .tint(GameTheme.neonCyan)
         .preferredColorScheme(.dark)
