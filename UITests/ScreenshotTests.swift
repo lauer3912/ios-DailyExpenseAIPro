@@ -9,69 +9,74 @@ final class ScreenshotTests: XCTestCase {
         app = XCUIApplication()
         app.launchArguments = ["--uitesting"]
         app.launch()
-        sleep(2)
+        Thread.sleep(forTimeInterval: 2.0)
     }
 
     override func tearDownWithError() throws {
         app.terminate()
     }
 
-    // MARK: - iPhone 6.9" Screenshots
+    // MARK: - Tab Navigation Helper
 
-    private func saveScreenshot(named name: String) {
-        let screenshot = app.windows.firstMatch.screenshot()
-        let data = screenshot.pngRepresentation
-        let path = "/tmp/iphone69_\(name).png"
+    func tapTab(identifier: String) {
+        let predicate = NSPredicate(format: "identifier == %@", identifier)
+        let button = app.buttons.matching(predicate).firstMatch
+        if button.exists {
+            button.tap()
+            Thread.sleep(forTimeInterval: 2.0)
+        } else {
+            print("WARNING: Could not find tab button: \(identifier)")
+        }
+    }
+
+    // MARK: - Screenshot Helper
+
+    private func capture(_ name: String) {
+        let path = "/tmp/\(name).png"
+        let data = app.windows.firstMatch.screenshot().pngRepresentation
         try? data.write(to: URL(fileURLWithPath: path))
         print("Saved: \(path) (\(data.count) bytes)")
     }
 
-    func testiPhone_69_01_Dashboard() throws {
-        app.tabBars.buttons.element(boundBy: 0).tap()
-        sleep(1)
-        saveScreenshot(named: "Dashboard")
+    // MARK: - iPhone 6.9" Screenshots (1320×2868)
+
+    func testiPhone_69_01_Hub() throws {
+        capture("iPhone_69_portrait_01_Hub")
     }
 
-    func testiPhone_69_02_Transactions() throws {
-        app.tabBars.buttons.element(boundBy: 1).tap()
-        sleep(1)
-        saveScreenshot(named: "Transactions")
+    func testiPhone_69_02_Items() throws {
+        tapTab(identifier: "tab_items")
+        capture("iPhone_69_portrait_02_Items")
     }
 
-    func testiPhone_69_03_AddTransaction() throws {
-        app.tabBars.buttons.element(boundBy: 2).tap()
-        sleep(1)
-        saveScreenshot(named: "AddTransaction")
+    func testiPhone_69_03_Quest() throws {
+        tapTab(identifier: "tab_quest")
+        capture("iPhone_69_portrait_03_Quest")
     }
 
-    func testiPhone_69_04_Analytics() throws {
-        app.tabBars.buttons.element(boundBy: 3).tap()
-        sleep(1)
-        saveScreenshot(named: "Analytics")
+    func testiPhone_69_04_Stats() throws {
+        tapTab(identifier: "tab_stats")
+        capture("iPhone_69_portrait_04_Stats")
     }
 
-    func testiPhone_69_05_Settings() throws {
-        app.tabBars.buttons.element(boundBy: 4).tap()
-        sleep(1)
-        saveScreenshot(named: "Settings")
+    func testiPhone_69_05_Menu() throws {
+        tapTab(identifier: "tab_menu")
+        capture("iPhone_69_portrait_05_Menu")
     }
 
     func testiPhone_69_06_Subscription() throws {
-        // Go to Settings
-        app.tabBars.buttons.element(boundBy: 4).tap()
-        sleep(2)
-        // Swipe up to reach Subscription section
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 2.0)
         app.windows.firstMatch.swipeUp()
-        sleep(1)
+        Thread.sleep(forTimeInterval: 1.0)
         app.windows.firstMatch.swipeUp()
-        sleep(1)
-        // Tap Upgrade to Premium
+        Thread.sleep(forTimeInterval: 1.0)
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
         let button = app.buttons.element(matching: predicate)
         if button.exists {
             button.tap()
-            sleep(2)
+            Thread.sleep(forTimeInterval: 2.0)
         }
-        saveScreenshot(named: "Subscription")
+        capture("iPhone_69_portrait_06_Subscription")
     }
 }

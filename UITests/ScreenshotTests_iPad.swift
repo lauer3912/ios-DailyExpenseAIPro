@@ -9,79 +9,74 @@ final class ScreenshotTests_iPad: XCTestCase {
         app = XCUIApplication()
         app.launchArguments = ["--uitesting"]
         app.launch()
-        sleep(2)
+        Thread.sleep(forTimeInterval: 2.0)
     }
 
     override func tearDownWithError() throws {
         app.terminate()
     }
 
-    // MARK: - iPad 13" Screenshots
+    // MARK: - Tab Navigation Helper (accessibilityIdentifier + NSPredicate + firstMatch)
 
-    private func tapFloatingTabBar(at index: Int) {
-        let screenWidth = app.windows.firstMatch.frame.width
-        let screenHeight = app.windows.firstMatch.frame.height
-        let tabBarHeight: CGFloat = 60.0
-        let tabBarY = screenHeight - tabBarHeight - 20
-        let tabSpacing: CGFloat = 70.0
-        let startX = (screenWidth - (tabSpacing * 4)) / 2
-        let targetX = startX + (CGFloat(index) * tabSpacing)
-        let targetY = tabBarY + (tabBarHeight / 2)
-        let coordinate = app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0)).withOffset(CGVector(dx: targetX, dy: targetY))
-        coordinate.tap()
-        sleep(1)
+    func tapTab(identifier: String) {
+        let predicate = NSPredicate(format: "identifier == %@", identifier)
+        let button = app.buttons.matching(predicate).firstMatch
+        if button.exists {
+            button.tap()
+            Thread.sleep(forTimeInterval: 2.0)
+        } else {
+            print("WARNING: Could not find tab button: \(identifier)")
+        }
     }
 
-    private func saveScreenshot(named name: String) {
-        let screenshot = app.windows.firstMatch.screenshot()
-        let data = screenshot.pngRepresentation
-        let path = "/tmp/ipad13_\(name).png"
+    // MARK: - Screenshot Helper
+
+    private func capture(_ name: String) {
+        let path = "/tmp/\(name).png"
+        let data = app.windows.firstMatch.screenshot().pngRepresentation
         try? data.write(to: URL(fileURLWithPath: path))
         print("Saved: \(path) (\(data.count) bytes)")
     }
 
-    func testiPad_13_01_Dashboard() throws {
-        tapFloatingTabBar(at: 0)
-        saveScreenshot(named: "Dashboard")
+    // MARK: - iPad 13" Screenshots (2048×2732)
+
+    func testiPad_13_01_Hub() throws {
+        capture("iPad_13_portrait_01_Hub")
     }
 
-    func testiPad_13_02_Transactions() throws {
-        tapFloatingTabBar(at: 1)
-        saveScreenshot(named: "Transactions")
+    func testiPad_13_02_Items() throws {
+        tapTab(identifier: "tab_items")
+        capture("iPad_13_portrait_02_Items")
     }
 
-    func testiPad_13_03_AddTransaction() throws {
-        tapFloatingTabBar(at: 2)
-        saveScreenshot(named: "AddTransaction")
+    func testiPad_13_03_Quest() throws {
+        tapTab(identifier: "tab_quest")
+        capture("iPad_13_portrait_03_Quest")
     }
 
-    func testiPad_13_04_Analytics() throws {
-        tapFloatingTabBar(at: 3)
-        saveScreenshot(named: "Analytics")
+    func testiPad_13_04_Stats() throws {
+        tapTab(identifier: "tab_stats")
+        capture("iPad_13_portrait_04_Stats")
     }
 
-    func testiPad_13_05_Settings() throws {
-        tapFloatingTabBar(at: 4)
-        saveScreenshot(named: "Settings")
+    func testiPad_13_05_Menu() throws {
+        tapTab(identifier: "tab_menu")
+        capture("iPad_13_portrait_05_Menu")
     }
 
     func testiPad_13_06_Subscription() throws {
-        // Go to Settings
-        tapFloatingTabBar(at: 4)
-        sleep(2)
-        // Swipe up multiple times to reach Subscription section
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 2.0)
         for _ in 0..<4 {
             app.windows.firstMatch.swipeUp()
             Thread.sleep(forTimeInterval: 0.5)
         }
-        sleep(1)
-        // Try to tap Upgrade to Premium
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
         let button = app.buttons.element(matching: predicate)
         if button.exists {
             button.tap()
-            sleep(2)
+            Thread.sleep(forTimeInterval: 2.0)
         }
-        saveScreenshot(named: "Subscription")
+        capture("iPad_13_portrait_06_Subscription")
     }
 }
