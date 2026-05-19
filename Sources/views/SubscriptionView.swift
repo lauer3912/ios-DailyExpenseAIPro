@@ -379,3 +379,4 @@ struct FeatureRow: View {
     SubscriptionView()
         .environmentObject(AppStore())
 }
+
