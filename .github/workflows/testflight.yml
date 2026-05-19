@@ -133,39 +133,39 @@ jobs:
             API_KEY_PATH = os.path.expanduser(f"~/.appstoreconnect/private_keys/ApiKey_{API_KEY_ID}.p8")
 
             with open(API_KEY_PATH, 'rb') as f:
-            private_key = f.read()
+                private_key = f.read()
 
-            token = jwt.encode(
-            {
-            "iss": API_ISSUER,
-            "iat": int(time.time()),
-            "exp": int(time.time()) + 3600,
-            "aud": "appstoreconnect-v1",
-            "prn": f"apiKey/{API_KEY_ID}"
-            },
-            private_key,
-            algorithm="ES256",
-            headers={"kid": API_KEY_ID}
-            )
+                token = jwt.encode(
+                    {
+                        "iss": API_ISSUER,
+                        "iat": int(time.time()),
+                        "exp": int(time.time()) + 3600,
+                        "aud": "appstoreconnect-v1",
+                        "prn": f"apiKey/{API_KEY_ID}"
+                    },
+                    private_key,
+                    algorithm="ES256",
+                    headers={"kid": API_KEY_ID}
+                )
 
-            HEADERS = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "PATCH"
-            }
+                HEADERS = {
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "X-HTTP-Method-Override": "PATCH"
+                }
 
-            # Get app ID
-            apps_response = requests.get(
-            "https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=com.ggsheng.DailyExpenseAIPro",
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-            )
-            apps_data = apps_response.json()
-            if not apps_data.get('data'):
-            print(f"Error: Could not find app. Response: {apps_data}")
-            sys.exit(1)
+                # Get app ID
+                apps_response = requests.get(
+                    "https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=com.ggsheng.DailyExpenseAIPro",
+                    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+                )
+                apps_data = apps_response.json()
+                if not apps_data.get('data'):
+                    print(f"Error: Could not find app. Response: {apps_data}")
+                    sys.exit(1)
 
-            app_id = apps_data['data'][0]['id']
-            print(f"App ID: {app_id}")
+                app_id = apps_data['data'][0]['id']
+                print(f"App ID: {app_id}")
 
             # Get or create internal beta group
             groups_response = requests.get(
