@@ -30,7 +30,7 @@ class AppStore: ObservableObject {
     // MARK: - StoreKit Sync
     func syncWithStoreKit() async {
         await StoreKitManager.shared.updatePurchasedProducts()
-        let storeKitPremium = StoreKitManager.shared.isPremiumActive
+        let storeKitPremium = await StoreKitManager.shared.isPremiumActive
         if storeKitPremium {
             isPremium = true
             saveToUserDefaults()

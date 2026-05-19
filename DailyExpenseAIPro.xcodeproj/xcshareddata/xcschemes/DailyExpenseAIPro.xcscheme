@@ -35,6 +35,20 @@
                ReferencedContainer = "container:DailyExpenseAIPro.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "427681672734F532C794307C"
+               BuildableName = "DailyExpenseAIProWidget.appex"
+               BlueprintName = "DailyExpenseAIProWidget"
+               ReferencedContainer = "container:DailyExpenseAIPro.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

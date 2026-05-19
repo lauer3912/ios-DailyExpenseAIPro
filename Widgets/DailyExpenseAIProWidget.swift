@@ -79,7 +79,7 @@ struct DailyExpenseAIProWidgetEntryView: View {
     }
 }
 
-struct Transaction {
+struct Transaction: Identifiable {
     let id: UUID
     let amount: Double
     let type: TransactionType

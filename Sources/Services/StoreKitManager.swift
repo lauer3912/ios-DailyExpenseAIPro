@@ -1,12 +1,10 @@
 import Foundation
 import StoreKit
 
-// MARK: - StoreKit Manager (StoreKit 2)
 @MainActor
 final class StoreKitManager: ObservableObject {
     static let shared = StoreKitManager()
 
-    // MARK: - Product IDs (must match App Store Connect)
     enum ProductID: String, CaseIterable {
         case monthly = "com.ggsheng.DailyExpenseAIPro.premium_monthly"
         case yearly = "com.ggsheng.DailyExpenseAIPro.premium_yearly"
@@ -19,13 +17,11 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
-    // MARK: - Published Properties
     @Published private(set) var products: [Product] = []
     @Published private(set) var purchasedProductIDs: Set<String> = []
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
 
-    // MARK: - Subscription Status
     var isPremiumActive: Bool {
         purchasedProductIDs.contains(ProductID.monthly.rawValue) ||
         purchasedProductIDs.contains(ProductID.yearly.rawValue)
@@ -45,18 +41,17 @@ final class StoreKitManager: ObservableObject {
         updateListenerTask?.cancel()
     }
 
-    // MARK: - Load Products from App Store
     func loadProducts() async {
         isLoading = true
         errorMessage = nil
 
         do {
-            let productIDs = Set(ProductID.allCases.map { $0.rawValue })
+            let productIDs = Set(ProductID.allCases.map { p in p.rawValue })
             products = try await Product.products(for: productIDs)
-                .sorted { $0.price < $1.price }
+                .sorted { a, b in a.price < b.price }
 
             if products.isEmpty {
-                errorMessage = "No subscription products found. Please configure in App Store Connect."
+                errorMessage = "No subscription products found."
             }
         } catch {
             errorMessage = "Failed to load products: \(error.localizedDescription)"
@@ -65,7 +60,6 @@ final class StoreKitManager: ObservableObject {
         isLoading = false
     }
 
-    // MARK: - Purchase
     func purchase(_ product: Product) async throws -> Bool {
         isLoading = true
         errorMessage = nil
@@ -86,7 +80,7 @@ final class StoreKitManager: ObservableObject {
                 return false
 
             case .pending:
-                errorMessage = "Purchase is pending. Please complete payment."
+                errorMessage = "Purchase is pending."
                 isLoading = false
                 return false
 
@@ -101,26 +95,18 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
-    // MARK: - Restore Purchases
     func restorePurchases() async {
         isLoading = true
         errorMessage = nil
 
-        do {
-            try await AppStore.sync()
-            await updatePurchasedProducts()
-        } catch {
-            errorMessage = "Restore failed: \(error.localizedDescription)"
-        }
-
+        await updatePurchasedProducts()
         isLoading = false
     }
 
-    // MARK: - Update Purchased Products
     func updatePurchasedProducts() async {
         var purchased: Set<String> = []
 
-        for await result in Transaction.currentEntitlements {
+        for await result in StoreKit.Transaction.currentEntitlements {
             do {
                 let transaction = try checkVerified(result)
                 if transaction.productType == .autoRenewable {
@@ -134,10 +120,9 @@ final class StoreKitManager: ObservableObject {
         purchasedProductIDs = purchased
     }
 
-    // MARK: - Listen for Transactions
     private func listenForTransactions() -> Task<Void, Error> {
-        Task.detached { [weak self] in
-            for await result in Transaction.updates {
+        Task { [weak self] in
+            for await result in StoreKit.Transaction.updates {
                 do {
                     let transaction = try self?.checkVerified(result)
                     await self?.updatePurchasedProducts()
@@ -149,8 +134,7 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
-    // MARK: - Verify Transaction
-    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+    nonisolated private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
         case .unverified:
             throw StoreKitError.verificationFailed
@@ -159,13 +143,11 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
-    // MARK: - Get Product by ID
     func product(for id: ProductID) -> Product? {
-        products.first { $0.id == id.rawValue }
+        products.first { p in p.id == id.rawValue }
     }
 }
 
-// MARK: - StoreKit Error
 enum StoreKitError: LocalizedError {
     case verificationFailed
     case productNotFound

@@ -1,11 +1,6 @@
 import SwiftUI
 import StoreKit
 
-// MARK: - IAP Product IDs (must match App Store Connect)
-private enum IAPProductID {
-    static let monthly = "com.ggsheng.DailyExpenseAIPro.premium_monthly"
-    static let yearly = "com.ggsheng.DailyExpenseAIPro.premium_yearly"
-}
 
 struct SubscriptionView: View {
     @EnvironmentObject var store: AppStore
@@ -18,10 +13,10 @@ struct SubscriptionView: View {
         case monthly = "Monthly"
         case yearly = "Yearly"
 
-        var productID: String {
+        var productID: StoreKitManager.ProductID {
             switch self {
-            case .monthly: return IAPProductID.monthly
-            case .yearly: return IAPProductID.yearly
+            case .monthly: return .monthly
+            case .yearly: return .yearly
             }
         }
 
