@@ -31,7 +31,7 @@ jobs:
           mkdir -p .build
           set +e
           xcrun xcodebuild \
-            -project ios-DailyExpenseAIPro/DailyExpenseAIPro.xcodeproj \
+            -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
             -configuration Debug \
             -sdk iphonesimulator \
