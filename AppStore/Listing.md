@@ -29,7 +29,7 @@ expense,tracker,budget,money,finance,accounting,income,ai,smart,categories
 
 ### Privacy Policy URL
 ```
-https://lauer3912.github.io/ios-DailyExpenseAIPro/PrivacyPolicy.html
+https://lauer3912.github.io/ios-DailyExpenseAIPro/docs/PrivacyPolicy.html
 ```
 
 ### Support URL
@@ -75,18 +75,20 @@ https://github.com/lauer3912/ios-DailyExpenseAIPro
 ## Screenshots Required
 
 ### iPhone 6.9" (iPhone 15 Pro Max)
-- 1_Home.png - Dashboard
-- 2_Transactions.png - Transaction List
-- 3_Add.png - Add Transaction
-- 4_Analytics.png - Charts
-- 5_Settings.png - Settings
+- 01_Dashboard.png - Dashboard (收入支出概览)
+- 02_Transactions.png - Transaction List (交易记录列表)
+- 03_AddTransaction.png - Add Transaction (添加交易)
+- 04_Analytics.png - Analytics (数据分析图表)
+- 05_Settings.png - Settings (设置)
+- 06_Subscription.png - Subscription (订阅 premium)
 
 ### iPad 13" (iPad Pro)
-- 1_Dashboard.png - Dashboard
-- 2_Transactions.png - Transaction List
-- 3_Add.png - Add Transaction
-- 4_Analytics.png - Charts
-- 5_Settings.png - Settings
+- 01_Dashboard.png - Dashboard (收入支出概览)
+- 02_Transactions.png - Transaction List (交易记录列表)
+- 03_AddTransaction.png - Add Transaction (添加交易)
+- 04_Analytics.png - Analytics (数据分析图表)
+- 05_Settings.png - Settings (设置)
+- 06_Subscription.png - Subscription (订阅 premium)
 
 ## App Icon
 - Required: 1024x1024 PNG
