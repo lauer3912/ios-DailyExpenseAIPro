@@ -1,10 +1,51 @@
 import SwiftUI
 
+// MARK: - IAP Product IDs (must match App Store Connect)
+private enum IAPProductID {
+    static let monthly = "com.ggsheng.DailyExpenseAIPro.premium_monthly"
+    static let yearly = "com.ggsheng.DailyExpenseAIPro.premium_yearly"
+}
+
+// MARK: - Price Display (must match App Store Connect)
+private enum SubscriptionPrice {
+    static let monthlyDisplay = "$4.99/month"
+    static let yearlyDisplay = "$39.99/year"
+    static let monthlyShort = "$4.99"
+    static let yearlyShort = "$39.99"
+}
+
 struct SubscriptionView: View {
     @EnvironmentObject var store: AppStore
     @State private var isUnlocking = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var selectedPlan: SubscriptionPlan = .monthly
+
+    enum SubscriptionPlan: String, CaseIterable {
+        case monthly = "Monthly"
+        case yearly = "Yearly"
+
+        var priceDisplay: String {
+            switch self {
+            case .monthly: return SubscriptionPrice.monthlyDisplay
+            case .yearly: return SubscriptionPrice.yearlyDisplay
+            }
+        }
+
+        var shortPrice: String {
+            switch self {
+            case .monthly: return SubscriptionPrice.monthlyShort
+            case .yearly: return SubscriptionPrice.yearlyShort
+            }
+        }
+
+        var savings: String? {
+            switch self {
+            case .monthly: return nil
+            case .yearly: return "Save 33%"
+            }
+        }
+    }
 
     private let premiumFeatures = [
         ("chart.pie.fill", "Advanced Analytics", "Detailed charts & insights"),
@@ -48,12 +89,22 @@ struct SubscriptionView: View {
 
                         Text("Unlock Premium")
                             .font(.title).fontWeight(.bold)
-
-                        Text("$0.99/month")
-                            .font(.title3)
-                            .foregroundColor(.secondary)
                     }
                     .padding(.top, 20)
+
+                    // Plan Selector
+                    if !store.isPremium {
+                        VStack(spacing: 12) {
+                            ForEach(SubscriptionPlan.allCases, id: \.self) { plan in
+                                PlanSelector(
+                                    plan: plan,
+                                    isSelected: selectedPlan == plan,
+                                    onTap: { selectedPlan = plan }
+                                )
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
 
                     // Free Features
                     VStack(alignment: .leading, spacing: 12) {
@@ -103,7 +154,7 @@ struct SubscriptionView: View {
                                 } else {
                                     Image(systemName: "crown.fill")
                                 }
-                                Text(isUnlocking ? "Unlocking..." : "Subscribe Now")
+                                Text(isUnlocking ? "Unlocking..." : "Subscribe Now - \(selectedPlan.shortPrice)/\(selectedPlan == .monthly ? "mo" : "yr")")
                                     .fontWeight(.semibold)
                             }
                             .frame(maxWidth: .infinity)
@@ -131,9 +182,7 @@ struct SubscriptionView: View {
                         }
 
                         Button {
-                            // Restore purchases - for now just show alert
-                            alertMessage = "No previous purchases found."
-                            showAlert = true
+                            restorePurchases()
                         } label: {
                             Text("Restore Purchases")
                                 .font(.footnote)
@@ -163,7 +212,13 @@ struct SubscriptionView: View {
     private func unlockPremium() {
         isUnlocking = true
 
-        // Simulate network delay
+        // TODO: Integrate StoreKit for actual IAP
+        // Use StoreKit 2 API:
+        // let productIDs = [selectedPlan == .monthly ? IAPProductID.monthly : IAPProductID.yearly]
+        // let products = try await Product.products(for: Set(productIDs))
+        // let result = try await products.first?.purchase()
+
+        // Simulate network delay for now
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             store.isPremium = true
             store.saveToUserDefaults()
@@ -172,8 +227,66 @@ struct SubscriptionView: View {
             showAlert = true
         }
     }
+
+    private func restorePurchases() {
+        // TODO: Integrate StoreKit for actual restore
+        // Use StoreKit 2 API:
+        // try await Transaction.currentEntitlements
+
+        alertMessage = "No previous purchases found."
+        showAlert = true
+    }
 }
 
+// MARK: - Plan Selector Component
+struct PlanSelector: View {
+    let plan: SubscriptionView.SubscriptionPlan
+    let isSelected: Bool
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(plan.rawValue)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+
+                        if let savings = plan.savings {
+                            Text(savings)
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.green)
+                                .cornerRadius(4)
+                        }
+                    }
+
+                    Text(plan.priceDisplay)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+
+                Spacer()
+
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(.title2)
+                    .foregroundColor(isSelected ? .mint : .gray)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? Color.mint : Color.gray.opacity(0.3), lineWidth: isSelected ? 2 : 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+// MARK: - Feature Row Component
 struct FeatureRow: View {
     let icon: String
     let iconColor: Color
