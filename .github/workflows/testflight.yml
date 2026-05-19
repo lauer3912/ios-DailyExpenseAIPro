@@ -122,120 +122,120 @@ jobs:
           API_KEY_PATH="$HOME/.appstoreconnect/private_keys/ApiKey_${API_KEY_ID}.p8"
 
           python3 << 'PYTHON_SCRIPT'
-import jwt
-import time
-import requests
-import os
-import sys
+            import jwt
+            import time
+            import requests
+            import os
+            import sys
 
-API_KEY_ID = os.environ['API_KEY_ID']
-API_ISSUER = os.environ['API_ISSUER']
-API_KEY_PATH = os.path.expanduser(f"~/.appstoreconnect/private_keys/ApiKey_{API_KEY_ID}.p8")
+            API_KEY_ID = os.environ['API_KEY_ID']
+            API_ISSUER = os.environ['API_ISSUER']
+            API_KEY_PATH = os.path.expanduser(f"~/.appstoreconnect/private_keys/ApiKey_{API_KEY_ID}.p8")
 
-with open(API_KEY_PATH, 'rb') as f:
-    private_key = f.read()
+            with open(API_KEY_PATH, 'rb') as f:
+            private_key = f.read()
 
-token = jwt.encode(
-    {
-        "iss": API_ISSUER,
-        "iat": int(time.time()),
-        "exp": int(time.time()) + 3600,
-        "aud": "appstoreconnect-v1",
-        "prn": f"apiKey/{API_KEY_ID}"
-    },
-    private_key,
-    algorithm="ES256",
-    headers={"kid": API_KEY_ID}
-)
+            token = jwt.encode(
+            {
+            "iss": API_ISSUER,
+            "iat": int(time.time()),
+            "exp": int(time.time()) + 3600,
+            "aud": "appstoreconnect-v1",
+            "prn": f"apiKey/{API_KEY_ID}"
+            },
+            private_key,
+            algorithm="ES256",
+            headers={"kid": API_KEY_ID}
+            )
 
-HEADERS = {
-    "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json",
-    "X-HTTP-Method-Override": "PATCH"
-}
-
-# Get app ID
-apps_response = requests.get(
-    "https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=com.ggsheng.DailyExpenseAIPro",
-    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-)
-apps_data = apps_response.json()
-if not apps_data.get('data'):
-    print(f"Error: Could not find app. Response: {apps_data}")
-    sys.exit(1)
-
-app_id = apps_data['data'][0]['id']
-print(f"App ID: {app_id}")
-
-# Get or create internal beta group
-groups_response = requests.get(
-    f"https://api.appstoreconnect.apple.com/v1/apps/{app_id}/betaGroups",
-    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-)
-groups_data = groups_response.json()
-
-internal_group = None
-for group in groups_data.get('data', []):
-    if group['attributes']['isInternalGroup']:
-        internal_group = group
-        break
-
-if not internal_group:
-    create_response = requests.post(
-        f"https://api.appstoreconnect.apple.com/v1/apps/{app_id}/betaGroups",
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        json={
-            "data": {
-                "attributes": {
-                    "name": "Internal Testers",
-                    "isInternalGroup": True
-                },
-                "type": "betaGroups"
+            HEADERS = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "PATCH"
             }
-        }
-    )
-    create_data = create_response.json()
-    if create_response.status_code not in [200, 201]:
-        print(f"Error creating group: {create_data}")
-        sys.exit(1)
-    internal_group = create_data['data']
 
-group_id = internal_group['id']
-print(f"Internal beta group ID: {group_id}")
+            # Get app ID
+            apps_response = requests.get(
+            "https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=com.ggsheng.DailyExpenseAIPro",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+            )
+            apps_data = apps_response.json()
+            if not apps_data.get('data'):
+            print(f"Error: Could not find app. Response: {apps_data}")
+            sys.exit(1)
 
-# Add tester
-TESTER_EMAIL = "support@techidaily.com"
-testers_response = requests.get(
-    f"https://api.appstoreconnect.apple.com/v1/betaGroups/{group_id}/betaTesters",
-    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-)
-testers_data = testers_response.json()
+            app_id = apps_data['data'][0]['id']
+            print(f"App ID: {app_id}")
 
-already_exists = False
-for tester in testers_data.get('data', []):
-    if tester['attributes']['email'] == TESTER_EMAIL:
-        already_exists = True
-        print(f"Tester {TESTER_EMAIL} already exists in group")
-        break
+            # Get or create internal beta group
+            groups_response = requests.get(
+            f"https://api.appstoreconnect.apple.com/v1/apps/{app_id}/betaGroups",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+            )
+            groups_data = groups_response.json()
 
-if not already_exists:
-    add_response = requests.post(
-        f"https://api.appstoreconnect.apple.com/v1/betaGroups/{group_id}/betaTesters",
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        json={
+            internal_group = None
+            for group in groups_data.get('data', []):
+            if group['attributes']['isInternalGroup']:
+            internal_group = group
+            break
+
+            if not internal_group:
+            create_response = requests.post(
+            f"https://api.appstoreconnect.apple.com/v1/apps/{app_id}/betaGroups",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            json={
             "data": {
-                "attributes": {"email": TESTER_EMAIL},
-                "type": "betaTesters"
+            "attributes": {
+            "name": "Internal Testers",
+            "isInternalGroup": True
+            },
+            "type": "betaGroups"
             }
-        }
-    )
-    add_data = add_response.json()
-    if add_response.status_code in [200, 201]:
-        print(f"Successfully added {TESTER_EMAIL} to beta group")
-    else:
-        print(f"Error adding tester: {add_data}")
-else:
-    print(f"Tester {TESTER_EMAIL} already in beta group")
+            }
+            )
+            create_data = create_response.json()
+            if create_response.status_code not in [200, 201]:
+            print(f"Error creating group: {create_data}")
+            sys.exit(1)
+            internal_group = create_data['data']
 
-print("\nDone! support@techidaily.com should have access to the latest TestFlight build.")
-PYTHON_SCRIPT
+            group_id = internal_group['id']
+            print(f"Internal beta group ID: {group_id}")
+
+            # Add tester
+            TESTER_EMAIL = "support@techidaily.com"
+            testers_response = requests.get(
+            f"https://api.appstoreconnect.apple.com/v1/betaGroups/{group_id}/betaTesters",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+            )
+            testers_data = testers_response.json()
+
+            already_exists = False
+            for tester in testers_data.get('data', []):
+            if tester['attributes']['email'] == TESTER_EMAIL:
+            already_exists = True
+            print(f"Tester {TESTER_EMAIL} already exists in group")
+            break
+
+            if not already_exists:
+            add_response = requests.post(
+            f"https://api.appstoreconnect.apple.com/v1/betaGroups/{group_id}/betaTesters",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            json={
+            "data": {
+            "attributes": {"email": TESTER_EMAIL},
+            "type": "betaTesters"
+            }
+            }
+            )
+            add_data = add_response.json()
+            if add_response.status_code in [200, 201]:
+            print(f"Successfully added {TESTER_EMAIL} to beta group")
+            else:
+            print(f"Error adding tester: {add_data}")
+            else:
+            print(f"Tester {TESTER_EMAIL} already in beta group")
+
+            print("\nDone! support@techidaily.com should have access to the latest TestFlight build.")
+            PYTHON_SCRIPT
