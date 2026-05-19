@@ -13,9 +13,11 @@
 		32DF506292088F79D779B706 /* BudgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EF295BDBA97DEAFA2E26DF /* BudgetProgressView.swift */; };
 		3DFEDEE65B234D5F83D833AC /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CC4452E9350B7F599832FA /* GoalsView.swift */; };
 		3F1C4E343D76A460DE24A5EE /* RecurringTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779176D800C18F75683CB1D4 /* RecurringTransactionsView.swift */; };
+		484527FC4A6B1D6B05DF91D5 /* GameTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD9766C410AE66F6D19029 /* GameTheme.swift */; };
 		5FECF85CB45B0BEA9ACE60A1 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB36133BD9019304CE7BC86 /* TransactionListView.swift */; };
 		658FA5A13FFA09F404A50FAF /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E4D4DDB5451DD60BBF903 /* SubscriptionView.swift */; };
 		80E4D22493984A709C677D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E4417DA7B97665AE26A903 /* Assets.xcassets */; };
+		8ABDD4A6089D1030951BDC05 /* DailyExpenseAIProWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8DEE1BBA378677CB5410C69C /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465293CED28FA62627807A38 /* AddTransactionView.swift */; };
 		9C3714FEF629B49F23127829 /* DailyExpenseAIProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5158841358653C0462319D8F /* DailyExpenseAIProApp.swift */; };
 		B5476BB8EBCF972D07747851 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F46278B8735068A7218332 /* ExportView.swift */; };
@@ -23,11 +25,14 @@
 		C688D2FE0F581D59DF711EDB /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678525FD4D88CEF65A1C8DD0 /* AccountsView.swift */; };
 		CD7197D8E79932F5DCBA4F2B /* QuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A226F404C4CCC24D70B016 /* QuickActionsView.swift */; };
 		CFC83637E58AC509F67A85AF /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D168B00B97D2A3FCF04620FB /* AnalyticsView.swift */; };
+		D0D0DA5D216EB82F29FDD9F0 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7ECD8ADC1614A22EBD0341 /* StoreKitManager.swift */; };
 		D192D5B34DC3E8DA2F27FB76 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382EF9021ACCFD1968DDA1 /* ScreenshotTests.swift */; };
 		D4B7D1648E3190720C6DAF7E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B0858310A31EF197420A8 /* SettingsView.swift */; };
 		D54A0B712219FB25EE9FDFB0 /* BudgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143577A10EFA0A6FF11E02F6 /* BudgetsView.swift */; };
+		D7C841E3017A4266ACF20421 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB58C2B6E0C06CCCF87543A /* Theme.swift */; };
 		E0487C481109EFB003BF1297 /* ScreenshotTests_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1E836B797943095B3AFBF /* ScreenshotTests_iPad.swift */; };
 		EC4FA98BF5A87D12AF9E4FCC /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8830EC02F241223B4C828 /* MainTabView.swift */; };
+		F6D61EFBACB3A31CE6380F3E /* DailyExpenseAIProWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E650A66A017F7DB8100B00 /* DailyExpenseAIProWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,12 +43,36 @@
 			remoteGlobalIDString = 80B9933095720D57BB69EA26;
 			remoteInfo = DailyExpenseAIPro;
 		};
+		94B1FAC274202D7132928532 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E775121EC68A09A52D5CFF68 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 427681672734F532C794307C;
+			remoteInfo = DailyExpenseAIProWidget;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		93C52290C0CB83C1F56A0337 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8ABDD4A6089D1030951BDC05 /* DailyExpenseAIProWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0AA7CD3265FDC46ACE78CD34 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		136DC64AB1D74D772307EC43 /* DailyExpenseAIProWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyExpenseAIProWidget.entitlements; sourceTree = "<group>"; };
 		13B1E836B797943095B3AFBF /* ScreenshotTests_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests_iPad.swift; sourceTree = "<group>"; };
 		143577A10EFA0A6FF11E02F6 /* BudgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsView.swift; sourceTree = "<group>"; };
+		3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DailyExpenseAIProWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		40E650A66A017F7DB8100B00 /* DailyExpenseAIProWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExpenseAIProWidget.swift; sourceTree = "<group>"; };
 		465293CED28FA62627807A38 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		4C9179160A2D9084A5F038DF /* DailyExpenseAIProUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DailyExpenseAIProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5158841358653C0462319D8F /* DailyExpenseAIProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExpenseAIProApp.swift; sourceTree = "<group>"; };
@@ -56,23 +85,38 @@
 		7DB36133BD9019304CE7BC86 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
 		7F6EE329DDF03EB50EAED5EC /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
 		90CC4452E9350B7F599832FA /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		9B0FD58E938B364C1E12465B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9F7B0858310A31EF197420A8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B0E4417DA7B97665AE26A903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6EF295BDBA97DEAFA2E26DF /* BudgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetProgressView.swift; sourceTree = "<group>"; };
 		C6F46278B8735068A7218332 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		CDBD9766C410AE66F6D19029 /* GameTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTheme.swift; sourceTree = "<group>"; };
 		D168B00B97D2A3FCF04620FB /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		DE382EF9021ACCFD1968DDA1 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
 		E9B3AA3ED8ECF5045A44D58C /* DailyExpenseAIPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyExpenseAIPro.entitlements; sourceTree = "<group>"; };
+		EF7ECD8ADC1614A22EBD0341 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		F1CFA4131851F27E36ED9EEA /* DailyExpenseAIPro.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DailyExpenseAIPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA052398B3487CC1F8C98A5 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		FE9E4D4DDB5451DD60BBF903 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		FFB58C2B6E0C06CCCF87543A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		2B6A9A90AC54FFCACB18C78A /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				136DC64AB1D74D772307EC43 /* DailyExpenseAIProWidget.entitlements */,
+				40E650A66A017F7DB8100B00 /* DailyExpenseAIProWidget.swift */,
+				9B0FD58E938B364C1E12465B /* Info.plist */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
 		4EBDBB6BD95742BFE5DC3681 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				FCA052398B3487CC1F8C98A5 /* NotificationService.swift */,
+				EF7ECD8ADC1614A22EBD0341 /* StoreKitManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -82,6 +126,7 @@
 			children = (
 				F1CFA4131851F27E36ED9EEA /* DailyExpenseAIPro.app */,
 				4C9179160A2D9084A5F038DF /* DailyExpenseAIProUITests.xctest */,
+				3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +137,7 @@
 				B0E4417DA7B97665AE26A903 /* Assets.xcassets */,
 				CC37FEC60B7037B0EA2FCB4D /* Sources */,
 				C80C64F1384E156850EC8120 /* UITests */,
+				2B6A9A90AC54FFCACB18C78A /* Widgets */,
 				7DB93D3242BA53DC6FA4D8C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -133,7 +179,9 @@
 				0AA7CD3265FDC46ACE78CD34 /* AppStore.swift */,
 				E9B3AA3ED8ECF5045A44D58C /* DailyExpenseAIPro.entitlements */,
 				5158841358653C0462319D8F /* DailyExpenseAIProApp.swift */,
+				CDBD9766C410AE66F6D19029 /* GameTheme.swift */,
 				5FF0908AA7100441ADDD337A /* Info.plist */,
+				FFB58C2B6E0C06CCCF87543A /* Theme.swift */,
 				4EBDBB6BD95742BFE5DC3681 /* Services */,
 				C46E520ECF84ED57F90ACD5D /* views */,
 			);
@@ -143,6 +191,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		427681672734F532C794307C /* DailyExpenseAIProWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AB0F267CEFA2C6924C601D1 /* Build configuration list for PBXNativeTarget "DailyExpenseAIProWidget" */;
+			buildPhases = (
+				6C17B1BBAD721DD8CDA7478A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DailyExpenseAIProWidget;
+			packageProductDependencies = (
+			);
+			productName = DailyExpenseAIProWidget;
+			productReference = 3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		64C134CD931AC37CDCEA933E /* DailyExpenseAIProUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F85ED1E3B6C7CC498A63DBD2 /* Build configuration list for PBXNativeTarget "DailyExpenseAIProUITests" */;
@@ -167,10 +232,12 @@
 			buildPhases = (
 				CD82F0EE7043C400D60BF2AA /* Sources */,
 				274EF5F0CFA126338F650762 /* Resources */,
+				93C52290C0CB83C1F56A0337 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1E26BC691F648347896029A5 /* PBXTargetDependency */,
 			);
 			name = DailyExpenseAIPro;
 			packageProductDependencies = (
@@ -188,6 +255,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					427681672734F532C794307C = {
+						DevelopmentTeam = 9L6N2ZF26B;
+						ProvisioningStyle = Automatic;
+					};
 					64C134CD931AC37CDCEA933E = {
 						DevelopmentTeam = 9L6N2ZF26B;
 						ProvisioningStyle = Automatic;
@@ -215,6 +286,7 @@
 			targets = (
 				80B9933095720D57BB69EA26 /* DailyExpenseAIPro */,
 				64C134CD931AC37CDCEA933E /* DailyExpenseAIProUITests */,
+				427681672734F532C794307C /* DailyExpenseAIProWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -240,6 +312,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6C17B1BBAD721DD8CDA7478A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6D61EFBACB3A31CE6380F3E /* DailyExpenseAIProWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD82F0EE7043C400D60BF2AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +332,7 @@
 				D54A0B712219FB25EE9FDFB0 /* BudgetsView.swift in Sources */,
 				9C3714FEF629B49F23127829 /* DailyExpenseAIProApp.swift in Sources */,
 				B5476BB8EBCF972D07747851 /* ExportView.swift in Sources */,
+				484527FC4A6B1D6B05DF91D5 /* GameTheme.swift in Sources */,
 				3DFEDEE65B234D5F83D833AC /* GoalsView.swift in Sources */,
 				168322F80F05591E4C471F5A /* ImportView.swift in Sources */,
 				EC4FA98BF5A87D12AF9E4FCC /* MainTabView.swift in Sources */,
@@ -259,7 +340,9 @@
 				CD7197D8E79932F5DCBA4F2B /* QuickActionsView.swift in Sources */,
 				3F1C4E343D76A460DE24A5EE /* RecurringTransactionsView.swift in Sources */,
 				D4B7D1648E3190720C6DAF7E /* SettingsView.swift in Sources */,
+				D0D0DA5D216EB82F29FDD9F0 /* StoreKitManager.swift in Sources */,
 				658FA5A13FFA09F404A50FAF /* SubscriptionView.swift in Sources */,
+				D7C841E3017A4266ACF20421 /* Theme.swift in Sources */,
 				5FECF85CB45B0BEA9ACE60A1 /* TransactionListView.swift in Sources */,
 				BB8DB8B8282F4B65D6422ADE /* TransferView.swift in Sources */,
 			);
@@ -268,6 +351,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E26BC691F648347896029A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 427681672734F532C794307C /* DailyExpenseAIProWidget */;
+			targetProxy = 94B1FAC274202D7132928532 /* PBXContainerItemProxy */;
+		};
 		C5F185479E55E1D69F358C3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 80B9933095720D57BB69EA26 /* DailyExpenseAIPro */;
@@ -344,6 +432,50 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		33E3B68174C042FAD10FBA6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_ENTITLEMENTS = Widgets/DailyExpenseAIProWidget.entitlements;
+				DEVELOPMENT_TEAM = 9L6N2ZF26B;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsheng.DailyExpenseAIPro.widget;
+				PRODUCT_NAME = DailyExpenseAIProWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		42545721EB93C43804D1D37B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = Widgets/DailyExpenseAIProWidget.entitlements;
+				DEVELOPMENT_TEAM = 9L6N2ZF26B;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsheng.DailyExpenseAIPro.widget;
+				PRODUCT_NAME = DailyExpenseAIProWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -510,6 +642,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3AB0F267CEFA2C6924C601D1 /* Build configuration list for PBXNativeTarget "DailyExpenseAIProWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42545721EB93C43804D1D37B /* Debug */,
+				33E3B68174C042FAD10FBA6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		93906E8F6EF26E3CCE6AC85F /* Build configuration list for PBXNativeTarget "DailyExpenseAIPro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
