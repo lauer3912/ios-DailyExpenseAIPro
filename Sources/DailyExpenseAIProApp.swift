@@ -9,6 +9,10 @@ struct DailyExpenseAIProApp: App {
         WindowGroup {
             MainTabView()
                 .environmentObject(store)
+                .task {
+                    // Sync with StoreKit to check existing purchases
+                    await store.syncWithStoreKit()
+                }
                 .onAppear {
                     store.processRecurringTransactions()
                     setupNotifications()

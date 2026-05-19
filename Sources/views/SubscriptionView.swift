@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 // MARK: - IAP Product IDs (must match App Store Connect)
 private enum IAPProductID {
@@ -6,17 +7,9 @@ private enum IAPProductID {
     static let yearly = "com.ggsheng.DailyExpenseAIPro.premium_yearly"
 }
 
-// MARK: - Price Display (must match App Store Connect)
-private enum SubscriptionPrice {
-    static let monthlyDisplay = "$4.99/month"
-    static let yearlyDisplay = "$39.99/year"
-    static let monthlyShort = "$4.99"
-    static let yearlyShort = "$39.99"
-}
-
 struct SubscriptionView: View {
     @EnvironmentObject var store: AppStore
-    @State private var isUnlocking = false
+    @StateObject private var storeKit = StoreKitManager.shared
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var selectedPlan: SubscriptionPlan = .monthly
@@ -25,17 +18,24 @@ struct SubscriptionView: View {
         case monthly = "Monthly"
         case yearly = "Yearly"
 
+        var productID: String {
+            switch self {
+            case .monthly: return IAPProductID.monthly
+            case .yearly: return IAPProductID.yearly
+            }
+        }
+
         var priceDisplay: String {
             switch self {
-            case .monthly: return SubscriptionPrice.monthlyDisplay
-            case .yearly: return SubscriptionPrice.yearlyDisplay
+            case .monthly: return "$4.99/month"
+            case .yearly: return "$39.99/year"
             }
         }
 
         var shortPrice: String {
             switch self {
-            case .monthly: return SubscriptionPrice.monthlyShort
-            case .yearly: return SubscriptionPrice.yearlyShort
+            case .monthly: return "$4.99"
+            case .yearly: return "$39.99"
             }
         }
 
@@ -89,21 +89,49 @@ struct SubscriptionView: View {
 
                         Text("Unlock Premium")
                             .font(.title).fontWeight(.bold)
+
+                        if let error = storeKit.errorMessage {
+                            Text(error)
+                                .font(.caption)
+                                .foregroundColor(.red)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                        }
                     }
                     .padding(.top, 20)
 
-                    // Plan Selector
-                    if !store.isPremium {
+                    // Plan Selector (only show if not premium)
+                    if !store.isPremium && !storeKit.products.isEmpty {
                         VStack(spacing: 12) {
                             ForEach(SubscriptionPlan.allCases, id: \.self) { plan in
                                 PlanSelector(
                                     plan: plan,
                                     isSelected: selectedPlan == plan,
+                                    price: storeKit.product(for: plan.productID)?.displayPrice ?? plan.priceDisplay,
                                     onTap: { selectedPlan = plan }
                                 )
                             }
                         }
                         .padding(.horizontal)
+                    } else if !store.isPremium {
+                        // Loading state
+                        VStack(spacing: 12) {
+                            ForEach(SubscriptionPlan.allCases, id: \.self) { plan in
+                                HStack {
+                                    Text(plan.rawValue)
+                                        .font(.headline)
+                                    Spacer()
+                                    Text(plan.priceDisplay)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(12)
+                            }
+                        }
+                        .padding(.horizontal)
+                        .redacted(reason: .placeholder)
                     }
 
                     // Free Features
@@ -144,34 +172,8 @@ struct SubscriptionView: View {
 
                     // Subscribe Button
                     VStack(spacing: 12) {
-                        Button {
-                            unlockPremium()
-                        } label: {
-                            HStack {
-                                if isUnlocking {
-                                    ProgressView()
-                                        .tint(.white)
-                                } else {
-                                    Image(systemName: "crown.fill")
-                                }
-                                Text(isUnlocking ? "Unlocking..." : "Subscribe Now - \(selectedPlan.shortPrice)/\(selectedPlan == .monthly ? "mo" : "yr")")
-                                    .fontWeight(.semibold)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(
-                                LinearGradient(
-                                    colors: [Color.mint, Color.blue],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                        }
-                        .disabled(isUnlocking || store.isPremium)
-
                         if store.isPremium {
+                            // Premium Active State
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.mint)
@@ -179,16 +181,60 @@ struct SubscriptionView: View {
                                     .foregroundColor(.mint)
                                     .fontWeight(.medium)
                             }
-                        }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.mint.opacity(0.1))
+                            .cornerRadius(12)
+                        } else {
+                            // Purchase Button
+                            Button {
+                                Task {
+                                    await purchase()
+                                }
+                            } label: {
+                                HStack {
+                                    if storeKit.isLoading {
+                                        ProgressView()
+                                            .tint(.white)
+                                    } else {
+                                        Image(systemName: "crown.fill")
+                                    }
+                                    Text(storeKit.isLoading ? "Processing..." : "Subscribe Now - \(selectedPlan.shortPrice)/\(selectedPlan == .monthly ? "mo" : "yr")")
+                                        .fontWeight(.semibold)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(
+                                    LinearGradient(
+                                        colors: [Color.mint, Color.blue],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .disabled(storeKit.isLoading)
 
-                        Button {
-                            restorePurchases()
-                        } label: {
-                            Text("Restore Purchases")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
+                            // Restore Button
+                            Button {
+                                Task {
+                                    await storeKit.restorePurchases()
+                                    if storeKit.isPremiumActive {
+                                        store.isPremium = true
+                                        store.saveToUserDefaults()
+                                    } else {
+                                        alertMessage = storeKit.errorMessage ?? "No previous purchases found."
+                                        showAlert = true
+                                    }
+                                }
+                            } label: {
+                                Text("Restore Purchases")
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.top, 4)
                         }
-                        .padding(.top, 4)
 
                         Text("Cancel anytime. Auto-renews until cancelled.")
                             .font(.caption2)
@@ -209,32 +255,26 @@ struct SubscriptionView: View {
         }
     }
 
-    private func unlockPremium() {
-        isUnlocking = true
+    // MARK: - Purchase Flow
+    private func purchase() async {
+        guard let product = storeKit.product(for: selectedPlan.productID) else {
+            alertMessage = "Product not found. Please try again later."
+            showAlert = true
+            return
+        }
 
-        // TODO: Integrate StoreKit for actual IAP
-        // Use StoreKit 2 API:
-        // let productIDs = [selectedPlan == .monthly ? IAPProductID.monthly : IAPProductID.yearly]
-        // let products = try await Product.products(for: Set(productIDs))
-        // let result = try await products.first?.purchase()
-
-        // Simulate network delay for now
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            store.isPremium = true
-            store.saveToUserDefaults()
-            isUnlocking = false
-            alertMessage = "Congratulations! Premium features unlocked."
+        do {
+            let success = try await storeKit.purchase(product)
+            if success {
+                store.isPremium = true
+                store.saveToUserDefaults()
+                alertMessage = "Congratulations! Premium features unlocked."
+                showAlert = true
+            }
+        } catch {
+            alertMessage = error.localizedDescription
             showAlert = true
         }
-    }
-
-    private func restorePurchases() {
-        // TODO: Integrate StoreKit for actual restore
-        // Use StoreKit 2 API:
-        // try await Transaction.currentEntitlements
-
-        alertMessage = "No previous purchases found."
-        showAlert = true
     }
 }
 
@@ -242,6 +282,7 @@ struct SubscriptionView: View {
 struct PlanSelector: View {
     let plan: SubscriptionView.SubscriptionPlan
     let isSelected: Bool
+    let price: String
     let onTap: () -> Void
 
     var body: some View {
@@ -265,7 +306,7 @@ struct PlanSelector: View {
                         }
                     }
 
-                    Text(plan.priceDisplay)
+                    Text(price)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }

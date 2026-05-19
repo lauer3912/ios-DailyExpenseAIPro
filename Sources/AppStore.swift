@@ -27,6 +27,16 @@ class AppStore: ObservableObject {
         }
     }
 
+    // MARK: - StoreKit Sync
+    func syncWithStoreKit() async {
+        await StoreKitManager.shared.updatePurchasedProducts()
+        let storeKitPremium = StoreKitManager.shared.isPremiumActive
+        if storeKitPremium {
+            isPremium = true
+            saveToUserDefaults()
+        }
+    }
+
     // MARK: - Default Data
 
     private func loadDefaultCategories() {
