@@ -1,0 +1,80 @@
+# Daily Expense AI Pro - Full Description
+
+Take control of your finances with Daily Expense AI Pro -- the intelligent expense tracker that learns your spending patterns and helps you reach your financial goals faster.
+
+## Your Personal Finance Assistant
+
+Daily Expense AI Pro uses on-device AI to analyze your spending habits and provide personalized insights. Unlike other expense trackers that just show numbers, we help you understand WHERE your money goes and HOW to save more.
+
+## Key Features
+
+**Smart Expense Tracking**
+- Add expenses in seconds with AI-powered category suggestions
+- Split transactions across multiple categories
+- Attach notes and photos to any transaction
+- Track both expenses AND income in one place
+
+**Intelligent Budgets**
+- Create monthly budgets for any category
+- Get real-time alerts when you're approaching limits
+- See your spending pace vs. your budget pace
+- Roll over unused budget to next month
+
+**Multiple Accounts**
+- Manage cash, bank accounts, credit cards, and more
+- See your net worth across all accounts
+- Track account-specific spending
+
+**Goals That Motivate**
+- Set savings goals with target amounts and dates
+- Watch your progress with visual trackers
+- Celebrate milestones when you reach your targets
+
+**Powerful Analytics**
+- See your spending patterns with beautiful charts
+- Compare months side-by-side
+- Identify your top spending categories
+- Track your income vs. expenses over time
+
+**Recurring Transactions**
+- Automate regular bills and subscriptions
+- Never forget a payment again
+- Get reminders before due dates
+
+**Data Security**
+- All data stored locally on your device
+- No cloud accounts or sync required
+- Your financial data stays private
+
+## Premium Features
+
+Upgrade to Premium for:
+- Unlimited transactions (free tier: 50/month)
+- Unlimited budgets and goals
+- Advanced charts and export options
+- Cloud sync across devices
+- Priority support
+
+## Why Choose Daily Expense AI Pro?
+
+**Built for iOS**: Native SwiftUI design that feels at home on your iPhone and iPad.
+
+**Privacy First**: Your financial data never leaves your device unless you explicitly choose to export it.
+
+**No Learning Curve**: Intuitive interface that anyone can use. Add expenses in seconds.
+
+**Smart Suggestions**: Our AI learns your habits and suggests categories, budgets, and goals -- saving you time.
+
+**Dark Mode**: Beautiful dark theme that's easy on the eyes for nighttime use.
+
+## Try It Free
+
+Download now and start tracking your expenses today. The first 50 transactions are free forever.
+
+Premium subscription: $4.99/month or $39.99/year
+- 3-day free trial included
+- Cancel anytime in Settings
+
+---
+
+Made with care by an independent developer. Your financial future starts here.
