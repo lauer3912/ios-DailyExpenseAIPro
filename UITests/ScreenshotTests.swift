@@ -79,4 +79,138 @@ final class ScreenshotTests: XCTestCase {
         }
         capture("iPhone_69_portrait_06_Subscription")
     }
+
+    // MARK: - IAP Screenshots
+
+    /// Captures the subscription landing page on iPhone (shows premium features)
+    func testIAP_iPhone_01_SubscriptionLanding() throws {
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+        let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let button = app.buttons.element(matching: predicate)
+        if button.exists {
+            button.tap()
+            Thread.sleep(forTimeInterval: 2.0)
+        }
+        capture("IAP_iPhone_01_SubscriptionLanding")
+    }
+
+    /// Captures the purchase modal / subscribe sheet on iPhone
+    func testIAP_iPhone_02_PurchaseModal() throws {
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+
+        let upgradePredicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let upgradeButton = app.buttons.element(matching: upgradePredicate)
+        if upgradeButton.exists {
+            upgradeButton.tap()
+            Thread.sleep(forTimeInterval: 3.0)
+        }
+
+        // Try to tap Subscribe Now button inside subscription view
+        let subscribePredicate = NSPredicate(format: "label CONTAINS[c] 'Subscribe'")
+        let subscribeButton = app.buttons.element(matching: subscribePredicate)
+        if subscribeButton.exists {
+            subscribeButton.tap()
+            Thread.sleep(forTimeInterval: 4.0)
+        }
+
+        capture("IAP_iPhone_02_PurchaseModal")
+    }
+
+    // MARK: - iPad 13" Screenshots (2064×2752)
+
+    func testiPad_13_01_Hub() throws {
+        capture("iPad_13_portrait_01_Hub")
+    }
+
+    func testiPad_13_02_Items() throws {
+        tapTab(identifier: "tab_items")
+        capture("iPad_13_portrait_02_Items")
+    }
+
+    func testiPad_13_03_Quest() throws {
+        tapTab(identifier: "tab_quest")
+        capture("iPad_13_portrait_03_Quest")
+    }
+
+    func testiPad_13_04_Stats() throws {
+        tapTab(identifier: "tab_stats")
+        capture("iPad_13_portrait_04_Stats")
+    }
+
+    func testiPad_13_05_Menu() throws {
+        tapTab(identifier: "tab_menu")
+        capture("iPad_13_portrait_05_Menu")
+    }
+
+    func testiPad_13_06_Subscription() throws {
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 2.0)
+        for _ in 0..<4 {
+            app.windows.firstMatch.swipeUp()
+            Thread.sleep(forTimeInterval: 0.5)
+        }
+        let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let button = app.buttons.element(matching: predicate)
+        if button.exists {
+            button.tap()
+            Thread.sleep(forTimeInterval: 2.0)
+        }
+        capture("iPad_13_portrait_06_Subscription")
+    }
+
+    // MARK: - IAP iPad Screenshots
+
+    /// Captures the subscription landing page on iPad
+    func testIAP_iPad_01_SubscriptionLanding() throws {
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+
+        let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let button = app.buttons.element(matching: predicate)
+        if button.exists {
+            button.tap()
+            Thread.sleep(forTimeInterval: 2.0)
+        }
+        capture("IAP_iPad_01_SubscriptionLanding")
+    }
+
+    /// Captures the purchase modal on iPad
+    func testIAP_iPad_02_PurchaseModal() throws {
+        tapTab(identifier: "tab_menu")
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+        app.windows.firstMatch.swipeUp()
+        Thread.sleep(forTimeInterval: 1.0)
+
+        let upgradePredicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
+        let upgradeButton = app.buttons.element(matching: upgradePredicate)
+        if upgradeButton.exists {
+            upgradeButton.tap()
+            Thread.sleep(forTimeInterval: 3.0)
+        }
+
+        let subscribePredicate = NSPredicate(format: "label CONTAINS[c] 'Subscribe'")
+        let subscribeButton = app.buttons.element(matching: subscribePredicate)
+        if subscribeButton.exists {
+            subscribeButton.tap()
+            Thread.sleep(forTimeInterval: 4.0)
+        }
+
+        capture("IAP_iPad_02_PurchaseModal")
+    }
 }
