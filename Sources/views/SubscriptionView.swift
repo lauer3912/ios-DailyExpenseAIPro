@@ -1,5 +1,6 @@
 import SwiftUI
 import StoreKit
+import AuthenticationServices
 
 
 struct SubscriptionView: View {
@@ -181,6 +182,40 @@ struct SubscriptionView: View {
                             .background(Color.mint.opacity(0.1))
                             .cornerRadius(12)
                         } else {
+                            // Sign in with Apple Button
+                            SignInWithAppleButton(.signIn) { request in
+                                request.requestedScopes = [.fullName, .email]
+                            } onCompletion: { result in
+                                switch result {
+                                case .success(let authorization):
+                                    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+                                        let userID = appleIDCredential.user
+                                        UserDefaults.standard.set(userID, forKey: "apple_user_id")
+                                        SignInWithAppleManager.shared.checkSignInStatus()
+                                    }
+                                case .failure(let error):
+                                    alertMessage = error.localizedDescription
+                                    showAlert = true
+                                }
+                            }
+                            .signInWithAppleButtonStyle(.black)
+                            .frame(height: 50)
+                            .cornerRadius(12)
+
+                            // Or Divider
+                            HStack {
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.3))
+                                    .frame(height: 1)
+                                Text("or")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Rectangle()
+                                    .fill(Color.gray.opacity(0.3))
+                                    .frame(height: 1)
+                            }
+
+
                             // Purchase Button
                             Button {
                                 Task {
