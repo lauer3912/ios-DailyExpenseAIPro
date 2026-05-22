@@ -7,14 +7,14 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Dashboard (Quest Hub)
+            // Dashboard
             DashboardView()
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Hub")
                 }
                 .tag(0)
-                .accessibilityIdentifier("tab_hub")
+                .accessibilityIdentifier("tab_dashboard")
 
             // Transactions (Inventory)
             TransactionListView()
@@ -23,7 +23,7 @@ struct MainTabView: View {
                     Text("Items")
                 }
                 .tag(1)
-                .accessibilityIdentifier("tab_items")
+                .accessibilityIdentifier("tab_transactions")
 
             // Add Button (Quest Entry)
             AddTransactionView()
@@ -33,7 +33,7 @@ struct MainTabView: View {
                     Text("Quest")
                 }
                 .tag(2)
-                .accessibilityIdentifier("tab_quest")
+                .accessibilityIdentifier("tab_add")
 
             // Analytics (Stats)
             AnalyticsView()
@@ -42,7 +42,7 @@ struct MainTabView: View {
                     Text("Stats")
                 }
                 .tag(3)
-                .accessibilityIdentifier("tab_stats")
+                .accessibilityIdentifier("tab_analytics")
 
             // More (Menu)
             SettingsView()
@@ -51,14 +51,14 @@ struct MainTabView: View {
                     Text("Menu")
                 }
                 .tag(4)
-                .accessibilityIdentifier("tab_menu")
+                .accessibilityIdentifier("tab_settings")
         }
         .tint(GameTheme.neonCyan)
         .preferredColorScheme(.dark)
     }
 }
 
-// MARK: - Dashboard View (Quest Hub)
+// MARK: - Dashboard View
 struct DashboardView: View {
     @EnvironmentObject var store: AppStore
     @State private var showAccounts = false
@@ -138,7 +138,7 @@ struct DashboardView: View {
                     .padding(.vertical)
                 }
             }
-            .navigationTitle("Quest Hub")
+            .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(GameTheme.cardBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)

@@ -127,7 +127,6 @@ struct SubscriptionView: View {
                             }
                         }
                         .padding(.horizontal)
-                        .redacted(reason: .placeholder)
                     }
 
                     // Free Features

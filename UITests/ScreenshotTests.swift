@@ -9,7 +9,7 @@ final class ScreenshotTests: XCTestCase {
         app = XCUIApplication()
         app.launchArguments = ["--uitesting"]
         app.launch()
-        Thread.sleep(forTimeInterval: 2.0)
+        Thread.sleep(forTimeInterval: 4.0)
     }
 
     override func tearDownWithError() throws {
@@ -19,13 +19,63 @@ final class ScreenshotTests: XCTestCase {
     // MARK: - Tab Navigation Helper
 
     func tapTab(identifier: String) {
-        let predicate = NSPredicate(format: "identifier == %@", identifier)
-        let button = app.buttons.matching(predicate).firstMatch
-        if button.exists {
-            button.tap()
-            Thread.sleep(forTimeInterval: 2.0)
+        // Map identifier to tab index
+        // Tab order from debug output: Hub(0), Items(1), Quest(2), Stats(3), Menu(4)
+        let identifierToIndex: [String: Int] = [
+            "tab_hub": 0,
+            "tab_dashboard": 0,
+            "tab_items": 1,
+            "tab_transactions": 1,
+            "tab_quest": 2,
+            "tab_add": 2,
+            "tab_stats": 3,
+            "tab_analytics": 3,
+            "tab_menu": 4,
+            "tab_settings": 4
+        ]
+        
+        guard let tabIndex = identifierToIndex[identifier] else {
+            print("WARNING: Unknown tab identifier: \(identifier)")
+            return
+        }
+        
+        // Get all buttons and find the tab bar buttons by index
+        // Based on debug output, tab bar buttons are at indices 0-4
+        let allButtons = app.buttons
+        let buttonCount = allButtons.count
+        
+        print("Total buttons: \(buttonCount)")
+        
+        // Tab bar buttons appear at specific indices
+        // Use boundBy to get specific button by index
+        if tabIndex < buttonCount {
+            let button = allButtons.element(boundBy: tabIndex)
+            if button.exists {
+                let label = button.label
+                let buttonId = button.identifier
+                print("Tapping tab [\(tabIndex)]: label=\(label), identifier=\(buttonId)")
+                button.tap()
+                Thread.sleep(forTimeInterval: 3.0)
+                print("Successfully tapped tab at index: \(tabIndex)")
+            } else {
+                print("WARNING: Button at index \(tabIndex) does not exist")
+                // Debug: print all buttons
+                for i in 0..<min(buttonCount, 15) {
+                    let btn = allButtons.element(boundBy: i)
+                    if btn.exists {
+                        print("  [\(i)] label=\(btn.label) id=\(btn.identifier)")
+                    }
+                }
+            }
         } else {
-            print("WARNING: Could not find tab button: \(identifier)")
+            print("WARNING: tabIndex \(tabIndex) >= buttonCount \(buttonCount)")
+            // Debug: print all buttons
+            for i in 0..<min(buttonCount, 15) {
+                let btn = allButtons.element(boundBy: i)
+                if btn.exists {
+                    print("  [\(i)] label=\(btn.label) id=\(btn.identifier)")
+                }
+            }
         }
     }
 
@@ -38,30 +88,30 @@ final class ScreenshotTests: XCTestCase {
         print("Saved: \(path) (\(data.count) bytes)")
     }
 
-    // MARK: - iPhone 6.9" Screenshots (1320×2868)
+    // MARK: - iPhone 6.9" Screenshots (1320x2868)
 
     func testiPhone_69_01_Hub() throws {
         capture("iPhone_69_portrait_01_Hub")
     }
 
-    func testiPhone_69_02_Items() throws {
+    func testiPhone_69_02_Transactions() throws {
         tapTab(identifier: "tab_items")
-        capture("iPhone_69_portrait_02_Items")
+        capture("iPhone_69_portrait_02_Transactions")
     }
 
-    func testiPhone_69_03_Quest() throws {
+    func testiPhone_69_03_Add() throws {
         tapTab(identifier: "tab_quest")
-        capture("iPhone_69_portrait_03_Quest")
+        capture("iPhone_69_portrait_03_Add")
     }
 
-    func testiPhone_69_04_Stats() throws {
+    func testiPhone_69_04_Analytics() throws {
         tapTab(identifier: "tab_stats")
-        capture("iPhone_69_portrait_04_Stats")
+        capture("iPhone_69_portrait_04_Analytics")
     }
 
-    func testiPhone_69_05_Menu() throws {
+    func testiPhone_69_05_Settings() throws {
         tapTab(identifier: "tab_menu")
-        capture("iPhone_69_portrait_05_Menu")
+        capture("iPhone_69_portrait_05_Settings")
     }
 
     func testiPhone_69_06_Subscription() throws {
@@ -72,7 +122,7 @@ final class ScreenshotTests: XCTestCase {
         app.windows.firstMatch.swipeUp()
         Thread.sleep(forTimeInterval: 1.0)
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let button = app.buttons.element(matching: predicate)
+        let button = app.buttons.matching(predicate).firstMatch
         if button.exists {
             button.tap()
             Thread.sleep(forTimeInterval: 2.0)
@@ -82,7 +132,6 @@ final class ScreenshotTests: XCTestCase {
 
     // MARK: - IAP Screenshots
 
-    /// Captures the subscription landing page on iPhone (shows premium features)
     func testIAP_iPhone_01_SubscriptionLanding() throws {
         tapTab(identifier: "tab_menu")
         Thread.sleep(forTimeInterval: 1.0)
@@ -91,7 +140,7 @@ final class ScreenshotTests: XCTestCase {
         app.windows.firstMatch.swipeUp()
         Thread.sleep(forTimeInterval: 1.0)
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let button = app.buttons.element(matching: predicate)
+        let button = app.buttons.matching(predicate).firstMatch
         if button.exists {
             button.tap()
             Thread.sleep(forTimeInterval: 2.0)
@@ -99,7 +148,6 @@ final class ScreenshotTests: XCTestCase {
         capture("IAP_iPhone_01_SubscriptionLanding")
     }
 
-    /// Captures the purchase modal / subscribe sheet on iPhone
     func testIAP_iPhone_02_PurchaseModal() throws {
         tapTab(identifier: "tab_menu")
         Thread.sleep(forTimeInterval: 1.0)
@@ -109,15 +157,14 @@ final class ScreenshotTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
 
         let upgradePredicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let upgradeButton = app.buttons.element(matching: upgradePredicate)
+        let upgradeButton = app.buttons.matching(upgradePredicate).firstMatch
         if upgradeButton.exists {
             upgradeButton.tap()
             Thread.sleep(forTimeInterval: 3.0)
         }
 
-        // Try to tap Subscribe Now button inside subscription view
         let subscribePredicate = NSPredicate(format: "label CONTAINS[c] 'Subscribe'")
-        let subscribeButton = app.buttons.element(matching: subscribePredicate)
+        let subscribeButton = app.buttons.matching(subscribePredicate).firstMatch
         if subscribeButton.exists {
             subscribeButton.tap()
             Thread.sleep(forTimeInterval: 4.0)
@@ -126,30 +173,30 @@ final class ScreenshotTests: XCTestCase {
         capture("IAP_iPhone_02_PurchaseModal")
     }
 
-    // MARK: - iPad 13" Screenshots (2064×2752)
+    // MARK: - iPad 13" Screenshots (2064x2752)
 
     func testiPad_13_01_Hub() throws {
         capture("iPad_13_portrait_01_Hub")
     }
 
-    func testiPad_13_02_Items() throws {
+    func testiPad_13_02_Transactions() throws {
         tapTab(identifier: "tab_items")
-        capture("iPad_13_portrait_02_Items")
+        capture("iPad_13_portrait_02_Transactions")
     }
 
-    func testiPad_13_03_Quest() throws {
+    func testiPad_13_03_Add() throws {
         tapTab(identifier: "tab_quest")
-        capture("iPad_13_portrait_03_Quest")
+        capture("iPad_13_portrait_03_Add")
     }
 
-    func testiPad_13_04_Stats() throws {
+    func testiPad_13_04_Analytics() throws {
         tapTab(identifier: "tab_stats")
-        capture("iPad_13_portrait_04_Stats")
+        capture("iPad_13_portrait_04_Analytics")
     }
 
-    func testiPad_13_05_Menu() throws {
+    func testiPad_13_05_Settings() throws {
         tapTab(identifier: "tab_menu")
-        capture("iPad_13_portrait_05_Menu")
+        capture("iPad_13_portrait_05_Settings")
     }
 
     func testiPad_13_06_Subscription() throws {
@@ -160,7 +207,7 @@ final class ScreenshotTests: XCTestCase {
             Thread.sleep(forTimeInterval: 0.5)
         }
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let button = app.buttons.element(matching: predicate)
+        let button = app.buttons.matching(predicate).firstMatch
         if button.exists {
             button.tap()
             Thread.sleep(forTimeInterval: 2.0)
@@ -170,7 +217,6 @@ final class ScreenshotTests: XCTestCase {
 
     // MARK: - IAP iPad Screenshots
 
-    /// Captures the subscription landing page on iPad
     func testIAP_iPad_01_SubscriptionLanding() throws {
         tapTab(identifier: "tab_menu")
         Thread.sleep(forTimeInterval: 1.0)
@@ -180,7 +226,7 @@ final class ScreenshotTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
 
         let predicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let button = app.buttons.element(matching: predicate)
+        let button = app.buttons.matching(predicate).firstMatch
         if button.exists {
             button.tap()
             Thread.sleep(forTimeInterval: 2.0)
@@ -188,7 +234,6 @@ final class ScreenshotTests: XCTestCase {
         capture("IAP_iPad_01_SubscriptionLanding")
     }
 
-    /// Captures the purchase modal on iPad
     func testIAP_iPad_02_PurchaseModal() throws {
         tapTab(identifier: "tab_menu")
         Thread.sleep(forTimeInterval: 1.0)
@@ -198,14 +243,14 @@ final class ScreenshotTests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
 
         let upgradePredicate = NSPredicate(format: "label CONTAINS[c] 'Upgrade'")
-        let upgradeButton = app.buttons.element(matching: upgradePredicate)
+        let upgradeButton = app.buttons.matching(upgradePredicate).firstMatch
         if upgradeButton.exists {
             upgradeButton.tap()
             Thread.sleep(forTimeInterval: 3.0)
         }
 
         let subscribePredicate = NSPredicate(format: "label CONTAINS[c] 'Subscribe'")
-        let subscribeButton = app.buttons.element(matching: subscribePredicate)
+        let subscribeButton = app.buttons.matching(subscribePredicate).firstMatch
         if subscribeButton.exists {
             subscribeButton.tap()
             Thread.sleep(forTimeInterval: 4.0)
