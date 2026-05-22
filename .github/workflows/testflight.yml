@@ -100,7 +100,7 @@ jobs:
             -f "$IPA" \
             -t ios \
             --apiKey "${{ vars.APPSTORE_API_KEY_ID }}" \
-            --apiIssuer "${{ vars.APPSTORE_API_ISSUER_ID }}" \
+            --apiIssuer "${{ vars.APPSTORE_ISSUER_ID }}" \
             --verbose \
             2>&1 | tee build/upload.log
           echo "Upload exit code: ${PIPESTATUS[0]}"
@@ -108,7 +108,7 @@ jobs:
       - name: Add Internal Tester
         env:
           API_KEY_ID: ${{ vars.APPSTORE_API_KEY_ID }}
-          API_ISSUER: ${{ vars.APPSTORE_API_ISSUER_ID }}
+          API_ISSUER: ${{ vars.APPSTORE_ISSUER_ID }}
         run: |
           pip3 install pyjwt requests 2>/dev/null || true
           API_KEY_PATH="$HOME/.appstoreconnect/private_keys/ApiKey_${API_KEY_ID}.p8"
