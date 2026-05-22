@@ -11,10 +11,12 @@
 		168322F80F05591E4C471F5A /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430B019BB3CF2C020C19B58 /* ImportView.swift */; };
 		245FF20A97607A18A6C7C7DB /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7CD3265FDC46ACE78CD34 /* AppStore.swift */; };
 		32DF506292088F79D779B706 /* BudgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EF295BDBA97DEAFA2E26DF /* BudgetProgressView.swift */; };
+		3332E6A890A84C606641D008 /* SignInWithAppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A446A5648A614FCC7C0610 /* SignInWithAppleManager.swift */; };
 		3DFEDEE65B234D5F83D833AC /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CC4452E9350B7F599832FA /* GoalsView.swift */; };
 		3F1C4E343D76A460DE24A5EE /* RecurringTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779176D800C18F75683CB1D4 /* RecurringTransactionsView.swift */; };
 		484527FC4A6B1D6B05DF91D5 /* GameTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD9766C410AE66F6D19029 /* GameTheme.swift */; };
 		5FECF85CB45B0BEA9ACE60A1 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB36133BD9019304CE7BC86 /* TransactionListView.swift */; };
+		6376B3AFE9105BBE51C43F5A /* IAPScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B938EA30DBE660EEF173EA1D /* IAPScreenshotTests.swift */; };
 		658FA5A13FFA09F404A50FAF /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9E4D4DDB5451DD60BBF903 /* SubscriptionView.swift */; };
 		80E4D22493984A709C677D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E4417DA7B97665AE26A903 /* Assets.xcassets */; };
 		8ABDD4A6089D1030951BDC05 /* DailyExpenseAIProWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -30,7 +32,6 @@
 		D4B7D1648E3190720C6DAF7E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7B0858310A31EF197420A8 /* SettingsView.swift */; };
 		D54A0B712219FB25EE9FDFB0 /* BudgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143577A10EFA0A6FF11E02F6 /* BudgetsView.swift */; };
 		D7C841E3017A4266ACF20421 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB58C2B6E0C06CCCF87543A /* Theme.swift */; };
-		E0487C481109EFB003BF1297 /* ScreenshotTests_iPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1E836B797943095B3AFBF /* ScreenshotTests_iPad.swift */; };
 		EC4FA98BF5A87D12AF9E4FCC /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8830EC02F241223B4C828 /* MainTabView.swift */; };
 		F6D61EFBACB3A31CE6380F3E /* DailyExpenseAIProWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E650A66A017F7DB8100B00 /* DailyExpenseAIProWidget.swift */; };
 /* End PBXBuildFile section */
@@ -69,7 +70,6 @@
 /* Begin PBXFileReference section */
 		0AA7CD3265FDC46ACE78CD34 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		136DC64AB1D74D772307EC43 /* DailyExpenseAIProWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyExpenseAIProWidget.entitlements; sourceTree = "<group>"; };
-		13B1E836B797943095B3AFBF /* ScreenshotTests_iPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests_iPad.swift; sourceTree = "<group>"; };
 		143577A10EFA0A6FF11E02F6 /* BudgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsView.swift; sourceTree = "<group>"; };
 		3F8415BF8395B00DF44FD025 /* DailyExpenseAIProWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DailyExpenseAIProWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E650A66A017F7DB8100B00 /* DailyExpenseAIProWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyExpenseAIProWidget.swift; sourceTree = "<group>"; };
@@ -84,11 +84,13 @@
 		779176D800C18F75683CB1D4 /* RecurringTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringTransactionsView.swift; sourceTree = "<group>"; };
 		7DB36133BD9019304CE7BC86 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
 		7F6EE329DDF03EB50EAED5EC /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
+		80A446A5648A614FCC7C0610 /* SignInWithAppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleManager.swift; sourceTree = "<group>"; };
 		90CC4452E9350B7F599832FA /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 		9B0FD58E938B364C1E12465B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9F7B0858310A31EF197420A8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B0E4417DA7B97665AE26A903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6EF295BDBA97DEAFA2E26DF /* BudgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetProgressView.swift; sourceTree = "<group>"; };
+		B938EA30DBE660EEF173EA1D /* IAPScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPScreenshotTests.swift; sourceTree = "<group>"; };
 		C6F46278B8735068A7218332 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		CDBD9766C410AE66F6D19029 /* GameTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTheme.swift; sourceTree = "<group>"; };
 		D168B00B97D2A3FCF04620FB /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				FCA052398B3487CC1F8C98A5 /* NotificationService.swift */,
+				80A446A5648A614FCC7C0610 /* SignInWithAppleManager.swift */,
 				EF7ECD8ADC1614A22EBD0341 /* StoreKitManager.swift */,
 			);
 			path = Services;
@@ -167,7 +170,7 @@
 		C80C64F1384E156850EC8120 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				13B1E836B797943095B3AFBF /* ScreenshotTests_iPad.swift */,
+				B938EA30DBE660EEF173EA1D /* IAPScreenshotTests.swift */,
 				DE382EF9021ACCFD1968DDA1 /* ScreenshotTests.swift */,
 			);
 			path = UITests;
@@ -307,8 +310,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6376B3AFE9105BBE51C43F5A /* IAPScreenshotTests.swift in Sources */,
 				D192D5B34DC3E8DA2F27FB76 /* ScreenshotTests.swift in Sources */,
-				E0487C481109EFB003BF1297 /* ScreenshotTests_iPad.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +343,7 @@
 				CD7197D8E79932F5DCBA4F2B /* QuickActionsView.swift in Sources */,
 				3F1C4E343D76A460DE24A5EE /* RecurringTransactionsView.swift in Sources */,
 				D4B7D1648E3190720C6DAF7E /* SettingsView.swift in Sources */,
+				3332E6A890A84C606641D008 /* SignInWithAppleManager.swift in Sources */,
 				D0D0DA5D216EB82F29FDD9F0 /* StoreKitManager.swift in Sources */,
 				658FA5A13FFA09F404A50FAF /* SubscriptionView.swift in Sources */,
 				D7C841E3017A4266ACF20421 /* Theme.swift in Sources */,
