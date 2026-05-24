@@ -53,7 +53,6 @@ jobs:
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGNING_ALLOWED=YES \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
-            PROVISIONING_PROFILE_SPECIFIER="DailyExpenseAIPro App Store" \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           echo "Archive exit code: ${PIPESTATUS[0]}"
