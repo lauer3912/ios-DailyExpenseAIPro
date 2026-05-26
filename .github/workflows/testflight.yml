@@ -2,14 +2,9 @@ name: TestFlight Upload
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Build & Test"]
-    types: [completed]
-    branches: [main]
 
 jobs:
   build-and-upload:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     runs-on: macos-26
     timeout-minutes: 90
     steps:
@@ -113,4 +108,3 @@ EOF
           name: build-logs
           path: build/*.log
           if-no-files-found: warn
-# Workflow updated at Tue May 26 11:05:24 CST 2026
