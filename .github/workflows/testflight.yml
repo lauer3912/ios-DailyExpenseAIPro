@@ -27,64 +27,21 @@ jobs:
           p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
           p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
 
-      - name: Write Provisioning Profile (Python)
-        env:
-          MAIN_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
-          WIDGET_PROFILE: ${{ secrets.PROVISIONING_PROFILE_WIDGET }}
+      - name: Copy Provisioning Profiles
         run: |
-          python3 << 'PYEOF'
-import os
-import base64
-
-profile_dir = os.path.expanduser("~/Library/MobileDevice/Provisioning Profiles")
-os.makedirs(profile_dir, exist_ok=True)
-
-main_profile = os.environ.get('MAIN_PROFILE', '')
-widget_profile = os.environ.get('WIDGET_PROFILE', '')
-
-# Decode and write main profile
-main_bytes = base64.b64decode(main_profile)
-main_path = os.path.join(profile_dir, "DailyExpenseAIPro_App_Store.mobileprovision")
-with open(main_path, 'wb') as f:
-    f.write(main_bytes)
-print(f"Main profile written: {len(main_bytes)} bytes")
-
-# Decode and write widget profile
-widget_bytes = base64.b64decode(widget_profile)
-widget_path = os.path.join(profile_dir, "DailyExpenseAIProWidget_App_Store.mobileprovision")
-with open(widget_path, 'wb') as f:
-    f.write(widget_bytes)
-print(f"Widget profile written: {len(widget_bytes)} bytes")
-
-# Verify
-import subprocess
-for path in [main_path, widget_path]:
-    result = subprocess.run(['security', 'cms', '-D', '-i', path], capture_output=True)
-    if result.returncode == 0:
-        print(f"Profile {os.path.basename(path)} decoded successfully")
-    else:
-        print(f"Profile {os.path.basename(path)} FAILED to decode")
-PYEOF
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          cp ".github/profiles/DailyExpenseAIPro_App_Store.mobileprovision" \
+             "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          cp ".github/profiles/DailyExpenseAIProWidget_App_Store.mobileprovision" \
+             "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          echo "Profile files copied:"
+          ls -la "$HOME/Library/MobileDevice/Provisioning Profiles/"*.mobileprovision
 
       - name: Write API Key
-        env:
-          API_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: |
-          python3 << 'PYEOF'
-import os
-import base64
-
-key_dir = os.path.expanduser("~/.appstoreconnect/private_keys")
-os.makedirs(key_dir, exist_ok=True)
-
-api_key = os.environ.get('API_KEY', '')
-key_bytes = base64.b64decode(api_key)
-key_path = os.path.join(key_dir, "ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8")
-with open(key_path, 'wb') as f:
-    f.write(key_bytes)
-os.chmod(key_path, 0o600)
-print(f"API key written: {len(key_bytes)} bytes")
-PYEOF
+          mkdir -p "$HOME/.appstoreconnect/private_keys"
+          echo "${{ secrets.APPSTORE_API_PRIVATE_KEY }}" | base64 -d > "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
+          chmod 600 "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
 
       - name: Build Archive
         run: |
@@ -98,10 +55,11 @@ PYEOF
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
-            -allowProvisioningUpdates \
+            PROVISIONING_PROFILE_SPECIFIER="DailyExpenseAIPro App Store" \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           echo "Archive exit code: ${PIPESTATUS[0]}"
+          ls -la build/DailyExpenseAIPro.xcarchive
 
       - name: Export IPA
         run: |
@@ -154,3 +112,4 @@ EOF
         with:
           name: build-logs
           path: build/*.log
+          if-no-files-found: warn
