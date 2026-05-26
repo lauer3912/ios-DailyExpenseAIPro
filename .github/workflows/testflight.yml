@@ -23,6 +23,7 @@ jobs:
              "$HOME/Library/MobileDevice/Provisioning Profiles/"
           cp ".github/profiles/DailyExpenseAIProWidget_App_Store.mobileprovision" \
              "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          ls -la "$HOME/Library/MobileDevice/Provisioning Profiles/"
           echo "Profile files copied"
 
       - name: Compute Certificate Base64
@@ -42,12 +43,11 @@ jobs:
           cp ".github/certs/AuthKey_${{ vars.APPSTORE_API_KEY_ID }}.p8" \
              "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
           chmod 600 "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
-          echo "API key copied"
 
       - name: Build Archive
         run: |
           mkdir -p build
-          # Build without PROVISIONING_PROFILE_SPECIFIER - let Xcode auto-select based on Bundle ID
+          # -allowProvisioningUpdates lets xcodebuild find and use the copied profiles
           xcrun xcodebuild \
             -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
@@ -57,13 +57,14 @@ jobs:
             CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
+            -allowProvisioningUpdates \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           echo "Archive exit code: ${PIPESTATUS[0]}"
 
       - name: Export IPA
         run: |
-          # ExportOptions.plist maps Bundle ID -> Profile Name
+          # ExportOptions.plist maps Bundle ID -> Profile Name for export
           printf '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n  <key>method</key>\n  <string>app-store-connect</string>\n  <key>signingCertificate</key>\n  <string>Apple Distribution</string>\n  <key>teamId</key>\n  <string>9L6N2ZF26B</string>\n  <key>provisioningProfiles</key>\n  <dict>\n    <key>com.ggsheng.DailyExpenseAIPro</key>\n    <string>DailyExpenseAIPro App Store</string>\n    <key>com.ggsheng.DailyExpenseAIPro.widget</key>\n    <string>DailyExpenseAIProWidget App Store</string>\n  </dict>\n</dict>\n</plist>\n' > build/ExportOptions.plist
           xcrun xcodebuild \
             -exportArchive \
@@ -82,7 +83,6 @@ jobs:
             -f "$IPA" \
             -t ios \
             --apiKey "${{ vars.APPSTORE_API_KEY_ID }}" \
-            --apiIssuer "${{ vars.APPSTORE_API_KEY_ID }}" \
             --apiIssuer "${{ vars.APPSTORE_ISSUER_ID }}" \
             --verbose \
             2>&1 | tee build/upload.log
