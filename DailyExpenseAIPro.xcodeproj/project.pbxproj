@@ -444,9 +444,7 @@
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/DailyExpenseAIProWidget.entitlements;
-				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
-				PROVISIONING_PROFILE = bdd9b826-1821-4fd0-ab22-ae38a3c750a3;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -490,7 +488,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -543,9 +541,7 @@
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/DailyExpenseAIPro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)";
-				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
-				PROVISIONING_PROFILE = d4f0fa11-3996-4061-a971-ceaad1c880b5;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
