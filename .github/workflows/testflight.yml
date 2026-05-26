@@ -29,7 +29,6 @@ jobs:
         run: |
           CERT_B64=$(base64 -i .github/certs/szf_exported_cert.p12 | tr -d '\n')
           echo "CERT_B64=$CERT_B64" >> $GITHUB_ENV
-          echo "Cert base64 length: ${#CERT_B64}"
 
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v7
@@ -37,11 +36,13 @@ jobs:
           p12-file-base64: ${{ env.CERT_B64 }}
           p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
 
-      - name: Write API Key
+      - name: Copy API Key
         run: |
           mkdir -p "$HOME/.appstoreconnect/private_keys"
-          printf '%s' "${{ secrets.APPSTORE_API_PRIVATE_KEY }}" | base64 -d > "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
+          cp ".github/certs/AuthKey_H3973L93M5.p8" \
+             "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
           chmod 600 "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
+          echo "API key copied"
 
       - name: Build Archive
         run: |
