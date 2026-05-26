@@ -69,7 +69,7 @@ jobs:
             CODE_SIGNING_ALLOWED=YES \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
             -allowProvisioningUpdates \
-            -allowProvisioningDeviceSubstitution \
+            \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
