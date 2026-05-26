@@ -16,26 +16,6 @@ jobs:
         with:
           xcode-version: "~26.4.0"
 
-      - name: Add Apple ID Account
-        run: |
-          # Add Apple ID account to Xcode for automatic signing
-          # Using APPLE_ID_EMAIL and APPLE_ID_PASSWORD from GitHub Secrets
-          if [ -n "$APPLEID_USERNAME" ] && [ -n "$APPLEID_PASSWORD" ]; then
-            echo "Adding Apple ID account to Xcode..."
-            # Create temporary keychain for password
-            security create-keychain -p "temp-password" temp-keychain
-            security set-keychain-settings -lut 21600 temp-keychain
-            security unlock-keychain -p "temp-password" temp-keychain
-            
-            # Add Apple ID via xcrun
-            # Note: This requires App-Specific Password in APPLEID_PASSWORD
-            xcrun altool --store-cloud-documents-credentials \
-              --username "$APPLEID_USERNAME" \
-              --password "$APPLEID_PASSWORD" 2>/dev/null || true
-          else
-            echo "Apple ID credentials not provided, skipping account setup"
-          fi
-
       - name: Copy Provisioning Profiles
         run: |
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
@@ -66,6 +46,8 @@ jobs:
       - name: Build Archive
         run: |
           mkdir -p build
+          # With Automatic signing, DO NOT specify CODE_SIGN_IDENTITY
+          # Let Xcode automatically select the correct identity based on the certificate
           xcrun xcodebuild \
             -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
@@ -73,7 +55,6 @@ jobs:
             -sdk iphoneos \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGNING_ALLOWED=YES \
-            CODE_SIGN_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
             -allowProvisioningUpdates \
             -allowProvisioningDeviceSubstitution \
@@ -95,7 +76,6 @@ jobs:
             -exportOptionsPlist build/ExportOptions.plist \
             -exportPath build \
             2>&1 | tee build/export.log
-          # Fail immediately if export fails
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "Export failed with exit code ${PIPESTATUS[0]}"
             cat build/export.log
@@ -118,7 +98,6 @@ jobs:
             --apiIssuer "${{ vars.APPSTORE_ISSUER_ID }}" \
             --verbose \
             2>&1 | tee build/upload.log
-          # Fail immediately if upload fails
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "Upload failed with exit code ${PIPESTATUS[0]}"
             cat build/upload.log
