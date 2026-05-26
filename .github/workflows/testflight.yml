@@ -16,6 +16,20 @@ jobs:
         with:
           xcode-version: "~26.4.0"
 
+      - name: Configure Apple ID Account for Xcode
+        run: |
+          # Add Apple Developer account to Xcode for Automatic signing
+          # This is required because Automatic signing needs to verify profiles with Apple
+          if [ -n "$APPLEID_USERNAME" ] && [ -n "$APPLEID_PASSWORD" ]; then
+            echo "Adding Apple ID account: $APPLEID_USERNAME"
+            # Use security to store password in keychain first
+            security unlock-keychain -p "" ~/Library/Keychains/login.keychain-db 2>/dev/null || true
+            # Add account to Xcode via devsecurityaccount
+            /Applications/Xcode.app/Contents/Developer/usr/bin/devsecurity \
+              add-account "$APPLEID_USERNAME" "$APPLEID_PASSWORD" 2>/dev/null || \
+            echo "Note: Manual Apple ID setup may be required for CI"
+          fi
+
       - name: Copy Provisioning Profiles
         run: |
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
@@ -46,8 +60,6 @@ jobs:
       - name: Build Archive
         run: |
           mkdir -p build
-          # With Automatic signing, DO NOT specify CODE_SIGN_IDENTITY
-          # Let Xcode automatically select the correct identity based on the certificate
           xcrun xcodebuild \
             -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
@@ -60,7 +72,6 @@ jobs:
             -allowProvisioningDeviceSubstitution \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
-          # Fail immediately if archive fails
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
             echo "Archive failed with exit code ${PIPESTATUS[0]}"
             cat build/archive.log
