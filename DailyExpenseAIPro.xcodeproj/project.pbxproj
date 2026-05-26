@@ -444,7 +444,9 @@
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_ENTITLEMENTS = Widgets/DailyExpenseAIProWidget.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
+				PROVISIONING_PROFILE_SPECIFIER = "DailyExpenseAIProWidget App Store";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -488,7 +490,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -540,8 +542,10 @@
 				ASSETCATALOG_COMPILER_THINNING_MODE = None;
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_ENTITLEMENTS = Sources/DailyExpenseAIPro.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 9L6N2ZF26B;
+				PROVISIONING_PROFILE_SPECIFIER = "DailyExpenseAIPro App Store";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
