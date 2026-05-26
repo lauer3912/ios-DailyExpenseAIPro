@@ -16,6 +16,26 @@ jobs:
         with:
           xcode-version: "~26.4.0"
 
+      - name: Add Apple ID Account
+        run: |
+          # Add Apple ID account to Xcode for automatic signing
+          # Using APPLE_ID_EMAIL and APPLE_ID_PASSWORD from GitHub Secrets
+          if [ -n "$APPLEID_USERNAME" ] && [ -n "$APPLEID_PASSWORD" ]; then
+            echo "Adding Apple ID account to Xcode..."
+            # Create temporary keychain for password
+            security create-keychain -p "temp-password" temp-keychain
+            security set-keychain-settings -lut 21600 temp-keychain
+            security unlock-keychain -p "temp-password" temp-keychain
+            
+            # Add Apple ID via xcrun
+            # Note: This requires App-Specific Password in APPLEID_PASSWORD
+            xcrun altool --store-cloud-documents-credentials \
+              --username "$APPLEID_USERNAME" \
+              --password "$APPLEID_PASSWORD" 2>/dev/null || true
+          else
+            echo "Apple ID credentials not provided, skipping account setup"
+          fi
+
       - name: Copy Provisioning Profiles
         run: |
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
@@ -53,9 +73,10 @@ jobs:
             -sdk iphoneos \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGNING_ALLOWED=YES \
-            CODE_SIGNING_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
+            CODE_SIGN_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
             -allowProvisioningUpdates \
+            -allowProvisioningDeviceSubstitution \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           # Fail immediately if archive fails
@@ -67,7 +88,7 @@ jobs:
 
       - name: Export IPA
         run: |
-          printf '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n  <key>method</key>\n  <string>app-store-connect</string>\n  <key>signingCertificate</key>\n  <string>Apple Distribution</string>\n  <key>teamId</key>\n  <string>9L6N2ZF26B</string>\n  <key>provisioningProfiles</key>\n  <dict>\n    <key>com.ggsheng.DailyExpenseAIPro</key>\n    <string>d4f0fa11-3996-4061-a971-ceaad1c880b5</string>\n    <key>com.ggsheng.DailyExpenseAIPro.widget</key>\n    <string>bdd9b826-1821-4fd0-ab22-ae38a3c750a3</string>\n  </dict>\n</dict>\n</plist>\n' > build/ExportOptions.plist
+          printf '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n  <key>method</key>\n  <string>app-store-connect</string>\n  <key>signingCertificate</key>\n  <string>Apple Distribution</string>\n  <key>teamId</key>\n  <string>9L6N2ZF26B</string>\n  <key>provisioningProfiles</key>\n  <dict>\n    <key>com.ggsheng.DailyExpenseAIPro</key>\n    <string>iOS Team Store Provisioning Profile: com.ggsheng.DailyExpenseAIPro</string>\n    <key>com.ggsheng.DailyExpenseAIPro.widget</key>\n    <string>iOS Team Store Provisioning Profile: com.ggsheng.DailyExpenseAIPro.widget</string>\n  </dict>\n</dict>\n</plist>\n' > build/ExportOptions.plist
           xcrun xcodebuild \
             -exportArchive \
             -archivePath build/DailyExpenseAIPro.xcarchive \
