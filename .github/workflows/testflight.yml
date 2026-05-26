@@ -24,7 +24,6 @@ jobs:
           cp ".github/profiles/DailyExpenseAIProWidget_App_Store.mobileprovision" \
              "$HOME/Library/MobileDevice/Provisioning Profiles/"
           ls -la "$HOME/Library/MobileDevice/Provisioning Profiles/"
-          echo "Profile files copied"
 
       - name: Compute Certificate Base64
         run: |
@@ -47,7 +46,6 @@ jobs:
       - name: Build Archive
         run: |
           mkdir -p build
-          # -allowProvisioningUpdates lets xcodebuild find and use the copied profiles
           xcrun xcodebuild \
             -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
@@ -60,23 +58,36 @@ jobs:
             -allowProvisioningUpdates \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
-          echo "Archive exit code: ${PIPESTATUS[0]}"
+          # Fail immediately if archive fails
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "Archive failed with exit code ${PIPESTATUS[0]}"
+            cat build/archive.log
+            exit 1
+          fi
 
       - name: Export IPA
         run: |
-          # ExportOptions.plist maps Bundle ID -> Profile Name for export
-          printf '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n  <key>method</key>\n  <string>app-store-connect</string>\n  <key>signingCertificate</key>\n  <string>Apple Distribution</string>\n  <key>teamId</key>\n  <string>9L6N2ZF26B</string>\n  <key>provisioningProfiles</key>\n  <dict>\n    <key>com.ggsheng.DailyExpenseAIPro</key>\n    <string>DailyExpenseAIPro App Store</string>\n    <key>com.ggsheng.DailyExpenseAIPro.widget</key>\n    <string>DailyExpenseAIProWidget App Store</string>\n  </dict>\n</dict>\n</plist>\n' > build/ExportOptions.plist
+          printf '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n  <key>method</key>\n  <string>app-store-connect</string>\n  <key>signingCertificate</key>\n  <string>Apple Distribution</string>\n  <key>teamId</key>\n  <string>9L6N2ZF26B</string>\n  <key>provisioningProfiles</key>\n  <dict>\n    <key>com.ggsheng.DailyExpenseAIPro</key>\n    <string>d4f0fa11-3996-4061-a971-ceaad1c880b5</string>\n    <key>com.ggsheng.DailyExpenseAIPro.widget</key>\n    <string>bdd9b826-1821-4fd0-ab22-ae38a3c750a3</string>\n  </dict>\n</dict>\n</plist>\n' > build/ExportOptions.plist
           xcrun xcodebuild \
             -exportArchive \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             -exportOptionsPlist build/ExportOptions.plist \
             -exportPath build \
             2>&1 | tee build/export.log
-          echo "Export exit code: ${PIPESTATUS[0]}"
+          # Fail immediately if export fails
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "Export failed with exit code ${PIPESTATUS[0]}"
+            cat build/export.log
+            exit 1
+          fi
 
       - name: Upload to TestFlight
         run: |
           IPA=$(ls build/*.ipa 2>/dev/null | head -1)
+          if [ -z "$IPA" ]; then
+            echo "No IPA file found!"
+            exit 1
+          fi
           echo "Uploading IPA: $IPA"
           xcrun altool \
             --upload-app \
@@ -86,9 +97,15 @@ jobs:
             --apiIssuer "${{ vars.APPSTORE_ISSUER_ID }}" \
             --verbose \
             2>&1 | tee build/upload.log
+          # Fail immediately if upload fails
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "Upload failed with exit code ${PIPESTATUS[0]}"
+            cat build/upload.log
+            exit 1
+          fi
 
       - name: Upload Logs
-        if: failure() || cancelled()
+        if: failure()
         uses: actions/upload-artifact@v7
         with:
           name: build-logs
