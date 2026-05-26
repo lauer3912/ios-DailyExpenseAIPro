@@ -16,4 +16,4 @@ DailyExpenseAIPro is a professional personal finance management app designed for
 - iOS 17.0+
 - UserDefaults (local persistence)
 - WidgetKit
-- Swift Charts
+- Swift Charts# Trigger
