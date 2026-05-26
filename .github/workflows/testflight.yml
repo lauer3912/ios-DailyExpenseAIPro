@@ -34,12 +34,25 @@ jobs:
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
           echo "${{ secrets.PROVISIONING_PROFILE }}" | base64 -d \
             > "$HOME/Library/MobileDevice/Provisioning Profiles/DailyExpenseAIPro_App_Store.mobileprovision"
+          echo "${{ secrets.PROVISIONING_PROFILE_WIDGET }}" | base64 -d \
+            > "$HOME/Library/MobileDevice/Provisioning Profiles/DailyExpenseAIProWidget_App_Store.mobileprovision"
 
       - name: Write API Key
         run: |
           mkdir -p "$HOME/.appstoreconnect/private_keys"
           echo "${{ secrets.APPSTORE_API_PRIVATE_KEY }}" | base64 -d > "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
           chmod 600 "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
+
+      - name: Verify Profiles
+        run: |
+          echo "=== Verifying Provisioning Profiles ==="
+          ls -la "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          echo "=== Profile Details ==="
+          for f in "$HOME/Library/MobileDevice/Provisioning Profiles/"*.mobileprovision; do
+            echo "Profile: $f"
+            security cms -D -i "$f" -o /tmp/profile.plist 2>/dev/null || echo "Failed to decode profile"
+            /usr/bin/plutil -p /tmp/profile.plist 2>/dev/null | grep -E 'UUID|AppIDName|Name' | head -5
+          done
 
       - name: Build Archive
         run: |
@@ -51,6 +64,7 @@ jobs:
             -sdk iphoneos \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGNING_IDENTITY="Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
             -allowProvisioningUpdates \
             -archivePath build/DailyExpenseAIPro.xcarchive \
@@ -60,7 +74,7 @@ jobs:
 
       - name: Export IPA
         run: |
-          cat > build/ExportOptions.plist << 'EOF'
+          cat > build/ExportOptions.plist << 'EOFPLIST'
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -76,11 +90,11 @@ jobs:
               <key>com.ggsheng.DailyExpenseAIPro</key>
               <string>DailyExpenseAIPro App Store</string>
               <key>com.ggsheng.DailyExpenseAIPro.widget</key>
-              <string>DailyExpenseAIPro App Store</string>
+              <string>DailyExpenseAIProWidget App Store</string>
             </dict>
           </dict>
           </plist>
-          EOF
+          EOFPLIST
           xcrun xcodebuild \
             -exportArchive \
             -archivePath build/DailyExpenseAIPro.xcarchive \
@@ -191,7 +205,7 @@ jobs:
             # Add tester
             TESTER_EMAIL = "support@techidaily.com"
             testers_response = requests.get(
-                f"https://api.appstoreconnect.apple.com/v1/betaGroups/{group_id}/betaTesters",
+                f"https://api.appstoreconnect.apple.com/v1/apps/{group_id}/betaTesters",
                 headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
             )
             testers_data = testers_response.json()
