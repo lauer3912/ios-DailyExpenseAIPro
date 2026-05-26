@@ -16,20 +16,6 @@ jobs:
         with:
           xcode-version: "~26.4.0"
 
-      - name: Configure Apple ID Account for Xcode
-        run: |
-          # Add Apple Developer account to Xcode for Automatic signing
-          # This is required because Automatic signing needs to verify profiles with Apple
-          if [ -n "$APPLEID_USERNAME" ] && [ -n "$APPLEID_PASSWORD" ]; then
-            echo "Adding Apple ID account: $APPLEID_USERNAME"
-            # Use security to store password in keychain first
-            security unlock-keychain -p "" ~/Library/Keychains/login.keychain-db 2>/dev/null || true
-            # Add account to Xcode via devsecurityaccount
-            /Applications/Xcode.app/Contents/Developer/usr/bin/devsecurity \
-              add-account "$APPLEID_USERNAME" "$APPLEID_PASSWORD" 2>/dev/null || \
-            echo "Note: Manual Apple ID setup may be required for CI"
-          fi
-
       - name: Copy Provisioning Profiles
         run: |
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
@@ -37,7 +23,7 @@ jobs:
              "$HOME/Library/MobileDevice/Provisioning Profiles/"
           cp ".github/profiles/DailyExpenseAIProWidget_App_Store.mobileprovision" \
              "$HOME/Library/MobileDevice/Provisioning Profiles/"
-          ls -la "$HOME/Library/MobileDevice/Provisioning Profiles/"
+          echo "Profiles copied"
 
       - name: Compute Certificate Base64
         run: |
@@ -57,26 +43,48 @@ jobs:
              "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
           chmod 600 "$HOME/.appstoreconnect/private_keys/ApiKey_${{ vars.APPSTORE_API_KEY_ID }}.p8"
 
-      - name: Build Archive
+      - name: Build WITHOUT Signing
         run: |
           mkdir -p build
+          # Build without signing - we'll sign manually after
           xcrun xcodebuild \
             -project DailyExpenseAIPro.xcodeproj \
             -scheme DailyExpenseAIPro \
             -configuration Release \
             -sdk iphoneos \
-            CODE_SIGNING_REQUIRED=YES \
-            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
             DEVELOPMENT_TEAM=9L6N2ZF26B \
-            -allowProvisioningUpdates \
-            \
             -archivePath build/DailyExpenseAIPro.xcarchive \
             archive 2>&1 | tee build/archive.log
           if [ ${PIPESTATUS[0]} -ne 0 ]; then
-            echo "Archive failed with exit code ${PIPESTATUS[0]}"
+            echo "Build failed with exit code ${PIPESTATUS[0]}"
             cat build/archive.log
             exit 1
           fi
+
+      - name: Sign App Bundle
+        run: |
+          echo "Signing app bundle..."
+          # Find the .app bundle inside the archive
+          APP_BUNDLE=$(find build/DailyExpenseAIPro.xcarchive -name "*.app" -type d | head -1)
+          echo "App bundle: $APP_BUNDLE"
+          
+          # Sign the main app with distribution certificate
+          xcrun codesign -v -d \
+            -s "Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
+            -f "$APP_BUNDLE" 2>&1 | tee build/sign.log
+          
+          # Sign the widget extension
+          WIDGET_BUNDLE=$(find build/DailyExpenseAIPro.xcarchive -name "*.appex" -type d | head -1)
+          if [ -n "$WIDGET_BUNDLE" ]; then
+            echo "Signing widget: $WIDGET_BUNDLE"
+            xcrun codesign -v -d \
+              -s "Apple Distribution: ZhiFeng Sun (9L6N2ZF26B)" \
+              -f "$WIDGET_BUNDLE" 2>&1 | tee -a build/sign.log
+          fi
+          
+          echo "Signing complete"
 
       - name: Export IPA
         run: |
@@ -98,6 +106,7 @@ jobs:
           IPA=$(ls build/*.ipa 2>/dev/null | head -1)
           if [ -z "$IPA" ]; then
             echo "No IPA file found!"
+            ls -la build/
             exit 1
           fi
           echo "Uploading IPA: $IPA"
